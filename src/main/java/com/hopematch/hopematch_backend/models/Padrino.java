@@ -12,15 +12,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Padrino {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_padrino")
-    private int id_padrino;
+    private int id;
 
     @Column(name = "nombre", nullable = false, length = 255)
     private String nombre;
 
     @Column(name = "celular", nullable = false, length = 20)
-    private String celular;
+    private int celular;
 
     @Column(name = "email", nullable = false, length = 255, unique = true)
     private String email;
@@ -28,6 +28,9 @@ public class Padrino {
     @Column(name = "estado", nullable = false, length = 50)
     private String estado = "En revision";
 
-    @Column(name = "foto_perfil", nullable = false, length = 255)
-    private String fotoPerfil;
+    @Column(name = "foto_perfil", length = 255)
+    private String foto;
+
+    @Column(name = "contrasenia", nullable = false, length = 255)
+    private String contrasenia;
 }
