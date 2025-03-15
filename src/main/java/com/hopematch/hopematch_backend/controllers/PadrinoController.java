@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -26,8 +27,7 @@ public class PadrinoController {
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody Padrino loginPadrino) {
         Optional<Padrino> padrino = padrinoService.findByEmail(loginPadrino.getEmail());
-        if (padrino.isPresent() && passwordEncoder.matches(loginUser.getPassword(), padrino.get().getPassword())) {
-            // Aquí puedes devolver un token JWT si estás implementando autenticación con tokens
+        if (padrino.isPresent() && loginPadrino.getContrasenia().equals(padrino.get().getContrasenia())) {
             return ResponseEntity.ok("Inicio de sesión exitoso");
         } else {
             return ResponseEntity.status(401).body("Usuario o contraseña incorrectos");
