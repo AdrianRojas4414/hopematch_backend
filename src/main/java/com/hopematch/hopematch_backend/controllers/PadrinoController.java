@@ -33,4 +33,9 @@ public class PadrinoController {
         Optional<Padrino> padrino = padrinoService.getPadrinoById(id);
         return new ResponseEntity<>(padrino.get(), HttpStatus.OK);
     }
+
+    @PutMapping("/update/{id}")
+    public Padrino updatePadrino(@PathVariable int id, @RequestBody Padrino padrinoDetails){
+        return padrinoService.updatePadrino(id, padrinoDetails);
+    }
 }
