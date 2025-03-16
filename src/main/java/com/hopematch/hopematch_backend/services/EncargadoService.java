@@ -49,4 +49,23 @@ public class EncargadoService {
     }
 
 
+    public Encargado updateEncargado(int id, Encargado encargadoDetails) {
+        Optional<Encargado> optionalEncargado = encargadoRepository.findById(id);
+
+        if (optionalEncargado.isPresent()) {
+            Encargado encargado = optionalEncargado.get();
+
+            encargado.setNombre(encargadoDetails.getNombre());
+            encargado.setCelular(encargadoDetails.getCelular());
+            encargado.setEmail(encargadoDetails.getEmail());
+            encargado.setFoto(encargadoDetails.getFoto());
+            encargado.setContrasenia(encargadoDetails.getContrasenia());
+            encargado.setNombre_hogar(encargadoDetails.getNombre_hogar());
+            encargado.setDireccion_hogar(encargadoDetails.getDireccion_hogar());
+
+            return encargadoRepository.save(encargado);
+        } else {
+            throw new RuntimeException("Encargado con ID " + id + " no encontrado.");
+        }
+    }
 }

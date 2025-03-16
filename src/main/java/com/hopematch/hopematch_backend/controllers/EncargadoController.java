@@ -50,4 +50,9 @@ public class EncargadoController {
             return ResponseEntity.status(401).body("{\"message\": \"Usuario o contraseña incorrectos\"}");
         }
     }
+
+    @PutMapping("/update/{id}")
+    public Encargado updateEncargado(@PathVariable int id, @RequestBody Encargado encargadoDetails) {
+        return encargadoService.updateEncargado(id, encargadoDetails);
+    }
 }
