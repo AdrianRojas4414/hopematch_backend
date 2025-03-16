@@ -40,4 +40,14 @@ public class EncargadoController {
     public Nino addNinoToEncargado(@PathVariable int idEncargado, @RequestBody Nino nino){
         return encargadoService.addNinoToEncargado(idEncargado, nino);
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody Encargado loginEncargado) {
+        Optional<Encargado> encargado = encargadoService.findByEmail(loginEncargado.getEmail());
+        if (encargado.isPresent() && loginEncargado.getContrasenia().equals(encargado.get().getContrasenia())) {
+            return ResponseEntity.ok("Inicio de sesión exitoso");
+        } else {
+            return ResponseEntity.status(401).body("Usuario o contraseña incorrectos");
+        }
+    }
 }
