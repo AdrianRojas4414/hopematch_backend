@@ -22,6 +22,10 @@ public class NinoService {
         return ninoRepository.findById(id);
     }
 
+    public Optional<Nino> getNinoByCi(int ci){
+        return ninoRepository.findByCi(ci);
+    }
+
     public List<Nino> getAllNinos() {
         return ninoRepository.findAll();
     }

@@ -20,7 +20,7 @@ public class Nino {
     private int id;
 
     @Column(name = "ci", nullable = false, unique = true, length = 20)
-    private String ci;
+    private int ci;
 
     @Column(name = "nombre", nullable = false, length = 255)
     private String nombre;
@@ -47,11 +47,11 @@ public class Nino {
         this.id = id;
     }
 
-    public String getCi() {
+    public Integer getCi() {
         return ci;
     }
 
-    public void setCi(String ci) {
+    public void setCi(Integer ci) {
         this.ci = ci;
     }
 

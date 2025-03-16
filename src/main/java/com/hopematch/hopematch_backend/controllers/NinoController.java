@@ -30,6 +30,12 @@ public class NinoController {
         return new ResponseEntity<>(nino.get(), HttpStatus.OK);
     }
 
+    @GetMapping("/ci/{ci}")
+    public ResponseEntity<Nino> getNinoByCi(@PathVariable int ci){
+        Optional<Nino> nino = ninoService.getNinoByCi(ci);
+        return new ResponseEntity<>(nino.get(), HttpStatus.OK);
+    }
+
     @GetMapping("/list")
     public List<Nino> getAllNinos() {
         return ninoService.getAllNinos();
