@@ -19,6 +19,9 @@ public class EncargadoService {
     private NinoRepository ninoRepository;
 
     public Encargado saveEncargado(Encargado encargado){
+        if (encargado.getFoto() == null || encargado.getFoto() == "") {
+            encargado.setFoto("https://i.pinimg.com/736x/2c/f5/58/2cf558ab8c1f12b43f7326945672805e.jpg");
+        }
         return encargadoRepository.save(encargado);
     }
 

@@ -15,7 +15,7 @@ public class PadrinoService {
     private PadrinoRepository padrinoRepository;
 
     public Padrino savePadrino(Padrino padrino){
-        if (padrino.getFoto() == null) {
+        if (padrino.getFoto() == null || padrino.getFoto() == "") {
             padrino.setFoto("https://i.pinimg.com/736x/2c/f5/58/2cf558ab8c1f12b43f7326945672805e.jpg");
         }
         return padrinoRepository.save(padrino);
