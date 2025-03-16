@@ -1,5 +1,6 @@
 package com.hopematch.hopematch_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,6 +33,11 @@ public class Nino {
     @CollectionTable(name = "nino_necesidades", joinColumns = @JoinColumn(name = "id_nino"))
     @Column(name = "necesidad")
     private List<String> necesidades;
+
+    @ManyToOne
+    @JoinColumn(name = "id_encargado", nullable = false)
+    @JsonBackReference
+    private Encargado encargado;
 
     public int getId() {
         return id;

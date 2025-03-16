@@ -1,14 +1,19 @@
 package com.hopematch.hopematch_backend.controllers;
 
+import com.hopematch.hopematch_backend.models.Encargado;
 import com.hopematch.hopematch_backend.models.Nino;
 import com.hopematch.hopematch_backend.services.NinoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/nino")
+@CrossOrigin("http://localhost:4200/")
 public class NinoController {
 
     @Autowired
@@ -17,6 +22,12 @@ public class NinoController {
     @PostMapping("/add")
     public Nino createNino(@RequestBody Nino nino) {
         return ninoService.saveNino(nino);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Nino> getNinoById(@PathVariable int id){
+        Optional<Nino> nino = ninoService.getNinoById(id);
+        return new ResponseEntity<>(nino.get(), HttpStatus.OK);
     }
 
     @GetMapping("/list")

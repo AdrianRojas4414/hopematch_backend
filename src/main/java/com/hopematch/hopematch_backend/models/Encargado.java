@@ -1,10 +1,14 @@
 package com.hopematch.hopematch_backend.models;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -40,4 +44,8 @@ public class Encargado {
 
     @Column(name = "direccion_hogar", nullable = false, length = 255)
     private String direccion_hogar;
+
+    @OneToMany(mappedBy = "encargado", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private List<Nino> ninos = new ArrayList<>();
 }

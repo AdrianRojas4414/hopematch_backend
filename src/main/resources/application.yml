@@ -6,7 +6,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/hopematch
     username: root
-    password: Diego123$
+    password: mysqlroosevelt14
 
   jpa:
     show-sql: true

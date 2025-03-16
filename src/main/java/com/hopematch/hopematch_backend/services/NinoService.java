@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NinoService {
@@ -15,6 +16,10 @@ public class NinoService {
 
     public Nino saveNino(Nino nino) {
         return ninoRepository.save(nino);
+    }
+
+    public Optional<Nino> getNinoById(int id){
+        return ninoRepository.findById(id);
     }
 
     public List<Nino> getAllNinos() {
