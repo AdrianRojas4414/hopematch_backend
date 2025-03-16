@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -23,6 +24,21 @@ public class PadrinoController {
         return padrinoService.savePadrino(padrino);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody Padrino loginPadrino) {
+        Optional<Padrino> padrino = padrinoService.findByEmail(loginPadrino.getEmail());
+        if (padrino.isPresent() && loginPadrino.getContrasenia().equals(padrino.get().getContrasenia())) {
+            return ResponseEntity.ok("Inicio de sesión exitoso");
+        } else {
+            return ResponseEntity.status(401).body("Usuario o contraseña incorrectos");
+        }
+    }
+
+    @GetMapping("/hello")
+    public ResponseEntity<String> helloWorld() {
+        return ResponseEntity.ok("Hello World! Esto es HOPEMATCH");
+    }
+
     @GetMapping("/list")
     public List<Padrino> getAllPadrinos(){
         return padrinoService.getAllPadrinos();
@@ -32,5 +48,10 @@ public class PadrinoController {
     public ResponseEntity<Padrino> getPadrinoById(@PathVariable int id){
         Optional<Padrino> padrino = padrinoService.getPadrinoById(id);
         return new ResponseEntity<>(padrino.get(), HttpStatus.OK);
+    }
+
+    @PutMapping("/update/{id}")
+    public Padrino updatePadrino(@PathVariable int id, @RequestBody Padrino padrinoDetails){
+        return padrinoService.updatePadrino(id, padrinoDetails);
     }
 }

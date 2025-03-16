@@ -28,4 +28,20 @@ public class PadrinoService {
     public Optional<Padrino> getPadrinoById(int id){
          return padrinoRepository.findById(id);
     }
+
+    public Optional<Padrino> findByEmail(String email) {
+        return padrinoRepository.findByEmail(email);
+    }
+
+    public Padrino updatePadrino(int id, Padrino padrinoDetails){
+        return padrinoRepository.findById(id).map(padrino -> {
+            padrino.setId(padrinoDetails.getId());
+            padrino.setNombre(padrinoDetails.getNombre());
+            padrino.setEmail(padrinoDetails.getEmail());
+            padrino.setContrasenia(padrinoDetails.getContrasenia());
+            padrino.setCelular(padrinoDetails.getCelular());
+            padrino.setFoto(padrinoDetails.getFoto());
+            return padrinoRepository.save(padrino);
+        }).orElseThrow(() -> new RuntimeException("Padrino no encontrado con id: " + id));
+    }
 }
