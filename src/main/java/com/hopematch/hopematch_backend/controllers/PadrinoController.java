@@ -1,5 +1,6 @@
 package com.hopematch.hopematch_backend.controllers;
 
+import com.hopematch.hopematch_backend.models.Encargado;
 import com.hopematch.hopematch_backend.models.Padrino;
 import com.hopematch.hopematch_backend.services.PadrinoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class PadrinoController {
     public ResponseEntity<String> login(@RequestBody Padrino loginPadrino) {
         Optional<Padrino> padrino = padrinoService.findByEmail(loginPadrino.getEmail());
         if (padrino.isPresent() && loginPadrino.getContrasenia().equals(padrino.get().getContrasenia())) {
-            return ResponseEntity.ok("Inicio de sesión exitoso");
+            return ResponseEntity.ok("{\"id\": \"" + padrino.get().getId() + "\", \"userType\": \"Padrino\"}");
         } else {
             return ResponseEntity.status(401).body("Usuario o contraseña incorrectos");
         }
