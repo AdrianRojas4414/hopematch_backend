@@ -18,7 +18,7 @@ import java.util.List;
 public class Encargado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_padrino")
+    @Column(name = "id_encargado")
     private int id;
 
     @Column(name = "nombre", nullable = false, length = 255)
