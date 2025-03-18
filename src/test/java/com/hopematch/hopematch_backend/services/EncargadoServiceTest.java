@@ -2,6 +2,7 @@ package com.hopematch.hopematch_backend.services;
 
 import com.hopematch.hopematch_backend.models.Encargado;
 import com.hopematch.hopematch_backend.models.Nino;
+import com.hopematch.hopematch_backend.models.Padrino;
 import com.hopematch.hopematch_backend.repositories.EncargadoRepository;
 import com.hopematch.hopematch_backend.repositories.NinoRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -50,10 +52,19 @@ class EncargadoServiceTest {
     }
 
     @Test
+    @DisplayName("Verifica que se obtienen todos los encargados correctamente.")
+    void getAllEncargadosTest(){
+        when(encargadoRepository.findAll()).thenReturn(List.of(new Encargado(), new Encargado()));
+
+        List<Encargado> encargados = encargadoService.getAllEncargados();
+        assertNotNull(encargados);
+        assertEquals(2, encargados.size());
+    }
+
+    @Test
     @DisplayName("Verifica que se encuentre a un encargado por su Id")
     void getEncargadoByIdTest() {
         Encargado encargado = new Encargado();
-        encargado.setId(1);
         encargado.setNombre("Carlos");
 
         when(encargadoRepository.findById(1)).thenReturn(Optional.of(encargado));
@@ -92,4 +103,23 @@ class EncargadoServiceTest {
         assertEquals("Pedro", ninoResult.getNombre());
     }
 
+    @Test
+    @DisplayName("Verifica que se pueda actualizar un Encargado")
+    void updateEncargadoTest(){
+        Encargado encargado = new Encargado();
+        encargado.setNombre("Pedro");
+        encargado.setEmail("pedro@example.com");
+
+        Encargado updatedDetails = new Encargado();
+        updatedDetails.setNombre("Pedro Actualizado");
+        updatedDetails.setEmail("pedro_updated@example.com");
+
+        when(encargadoRepository.findById(1)).thenReturn(Optional.of(encargado));
+        when(encargadoRepository.save(any(Encargado.class))).thenReturn(updatedDetails);
+
+        Encargado encargado_result = encargadoService.updateEncargado(1, updatedDetails);
+        assertNotNull(encargado_result);
+        assertEquals("Pedro Actualizado", encargado_result.getNombre());
+        assertEquals("pedro_updated@example.com", encargado_result.getEmail());
+    }
 }
