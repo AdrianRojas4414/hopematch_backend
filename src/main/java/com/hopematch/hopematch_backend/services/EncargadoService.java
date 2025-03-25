@@ -78,7 +78,6 @@ public class EncargadoService {
             throw new RuntimeException("Encargado no encontrado");
         }
 
-        // Contar frecuencia de necesidades
         Map<String, Integer> necesidadesCount = new HashMap<>();
         for (Nino nino : encargado.get().getNinos()) {
             for (String necesidad : nino.getNecesidades()) {
@@ -86,7 +85,6 @@ public class EncargadoService {
             }
         }
 
-        // Ordenar por frecuencia (mayor a menor)
         return necesidadesCount.entrySet()
                 .stream()
                 .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
