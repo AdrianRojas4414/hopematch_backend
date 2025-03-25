@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EncargadoService {
@@ -67,5 +69,32 @@ public class EncargadoService {
         } else {
             throw new RuntimeException("Encargado con ID " + id + " no encontrado.");
         }
+    }
+
+
+    public Map<String, Integer> getNecesidadesAgrupadas(int idEncargado) {
+        Optional<Encargado> encargado = encargadoRepository.findById(idEncargado);
+        if (encargado.isEmpty()) {
+            throw new RuntimeException("Encargado no encontrado");
+        }
+
+        // Contar frecuencia de necesidades
+        Map<String, Integer> necesidadesCount = new HashMap<>();
+        for (Nino nino : encargado.get().getNinos()) {
+            for (String necesidad : nino.getNecesidades()) {
+                necesidadesCount.put(necesidad, necesidadesCount.getOrDefault(necesidad, 0) + 1);
+            }
+        }
+
+        // Ordenar por frecuencia (mayor a menor)
+        return necesidadesCount.entrySet()
+                .stream()
+                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (e1, e2) -> e1,
+                        LinkedHashMap::new
+                ));
     }
 }
