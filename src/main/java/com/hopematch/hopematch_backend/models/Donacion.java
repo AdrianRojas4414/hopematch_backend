@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Data
@@ -18,11 +17,11 @@ public class Donacion {
     @Column(name = "id_donacion")
     private int id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "padrino_id")
     private Padrino padrino;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "encargado_id")
     private Encargado encargado;
 

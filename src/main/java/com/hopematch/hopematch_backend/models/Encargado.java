@@ -1,6 +1,7 @@
 package com.hopematch.hopematch_backend.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -48,4 +49,12 @@ public class Encargado {
     @OneToMany(mappedBy = "encargado", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Nino> ninos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "encargado", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    private List<Donacion> donaciones = new ArrayList<>();
+
+    public int getId() {
+        return id;
+    }
 }

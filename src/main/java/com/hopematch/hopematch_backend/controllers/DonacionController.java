@@ -3,7 +3,6 @@ package com.hopematch.hopematch_backend.controllers;
 import com.hopematch.hopematch_backend.models.Donacion;
 import com.hopematch.hopematch_backend.services.DonacionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +26,7 @@ public class DonacionController {
         return donacionService.saveDonacion(donacion);
     }
 
-
-    @GetMapping("/listar")
+    @GetMapping("/list")
     public ResponseEntity<List<Donacion>> listarDonaciones() {
         return ResponseEntity.ok(donacionService.getAllDonaciones());
     }
