@@ -47,8 +47,9 @@ public class NinoController {
     }
 
     @GetMapping("/necesidades")
-    public ResponseEntity<List<List<String>>> getAllNecesidades() {
-        List<List<String>> necesidades = ninoService.getAllNecesidades();
-        return ResponseEntity.ok(necesidades);
+    public ResponseEntity<List<String>> getAllNecesidades() {
+        return ResponseEntity.ok(ninoService.getAllUniqueNecesidades());
     }
+
+
 }

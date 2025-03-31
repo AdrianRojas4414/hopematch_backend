@@ -41,8 +41,7 @@ public class NinoService {
         }).orElseThrow(() -> new RuntimeException("Niño no encontrado con id: " + id));
     }
 
-    public List<List<String>> getAllNecesidades() {
-        return ninoRepository.findAllNecesidades();
+    public List<String> getAllUniqueNecesidades() {
+        return ninoRepository.findDistinctNecesidades();
     }
-
 }

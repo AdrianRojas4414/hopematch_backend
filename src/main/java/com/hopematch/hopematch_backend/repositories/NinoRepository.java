@@ -12,6 +12,6 @@ import java.util.Optional;
 public interface NinoRepository extends JpaRepository<Nino, Integer> {
     Optional<Nino> findByCi(int ci);
 
-    @Query("SELECT n.necesidades FROM Nino n")
-    List<List<String>> findAllNecesidades();
+    @Query("SELECT DISTINCT elementos FROM Nino n JOIN n.necesidades elementos")
+    List<String> findDistinctNecesidades();
 }
