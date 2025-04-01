@@ -45,4 +45,11 @@ public class NinoController {
     public Nino updateNino(@PathVariable int id, @RequestBody Nino ninoDetails) {
         return ninoService.updateNino(id, ninoDetails);
     }
+
+    @GetMapping("/necesidades")
+    public ResponseEntity<List<String>> getAllNecesidades() {
+        return ResponseEntity.ok(ninoService.getAllUniqueNecesidades());
+    }
+
+
 }

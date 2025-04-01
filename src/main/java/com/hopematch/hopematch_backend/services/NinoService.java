@@ -3,6 +3,7 @@ package com.hopematch.hopematch_backend.services;
 import com.hopematch.hopematch_backend.models.Nino;
 import com.hopematch.hopematch_backend.repositories.NinoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,4 +41,7 @@ public class NinoService {
         }).orElseThrow(() -> new RuntimeException("Niño no encontrado con id: " + id));
     }
 
+    public List<String> getAllUniqueNecesidades() {
+        return ninoRepository.findDistinctNecesidades();
+    }
 }

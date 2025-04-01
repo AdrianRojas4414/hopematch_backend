@@ -1,9 +1,13 @@
 package com.hopematch.hopematch_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -33,4 +37,12 @@ public class Padrino {
 
     @Column(name = "contrasenia", nullable = false, length = 255)
     private String contrasenia;
+
+    @OneToMany(mappedBy = "padrino", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    private List<Donacion> donaciones = new ArrayList<>();
+
+    public int getId() {
+        return id;
+    }
 }
