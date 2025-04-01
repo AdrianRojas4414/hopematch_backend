@@ -22,6 +22,9 @@ public class DonacionController {
         if (donacion.getFechaDonacion() == null) {
             donacion.setFechaDonacion(LocalDate.now());
         }
+        if (donacion.getCantidadDonacion() <= 0) {
+            throw new RuntimeException("La cantidad debe ser mayor a cero");
+        }
 
         return donacionService.saveDonacion(donacion);
     }

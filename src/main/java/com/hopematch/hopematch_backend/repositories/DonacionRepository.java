@@ -12,9 +12,6 @@ import java.util.Optional;
 
 @Repository
 public interface DonacionRepository extends JpaRepository<Donacion, Integer> {
-    @Query("SELECT d FROM Donacion d LEFT JOIN FETCH d.padrino LEFT JOIN FETCH d.encargado WHERE d.id = :id")
-    Optional<Donacion> findByIdWithRelations(@Param("id") Integer id);
-
     @Override
     @EntityGraph(attributePaths = {"padrino", "encargado"})
     List<Donacion> findAll();
