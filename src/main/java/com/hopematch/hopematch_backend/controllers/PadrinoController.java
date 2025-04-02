@@ -29,7 +29,12 @@ public class PadrinoController {
     public ResponseEntity<String> login(@RequestBody Padrino loginPadrino) {
         Optional<Padrino> padrino = padrinoService.findByEmail(loginPadrino.getEmail());
         if (padrino.isPresent() && loginPadrino.getContrasenia().equals(padrino.get().getContrasenia())) {
-            return ResponseEntity.ok("{\"id\": \"" + padrino.get().getId() + "\", \"userType\": \"Padrino\"}");
+            if(padrino.get().getEstado().equals("En revision") || padrino.get().getEstado().equals("Activo")){
+                return ResponseEntity.ok("{\"id\": \"" + padrino.get().getId() + "\", \"userType\": \"Padrino\"}");
+            }
+            else {
+                return ResponseEntity.status(401).body("La cuenta se encuentra suspendida, no se puede iniciar sesion");
+            }
         } else {
             return ResponseEntity.status(401).body("Usuario o contraseña incorrectos");
         }
