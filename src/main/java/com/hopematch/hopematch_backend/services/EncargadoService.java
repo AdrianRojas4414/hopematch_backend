@@ -62,6 +62,7 @@ public class EncargadoService {
             encargado.setContrasenia(encargadoDetails.getContrasenia());
             encargado.setNombre_hogar(encargadoDetails.getNombre_hogar());
             encargado.setDireccion_hogar(encargadoDetails.getDireccion_hogar());
+            encargado.setEstado(encargadoDetails.getEstado());
 
             return encargadoRepository.save(encargado);
         } else {
