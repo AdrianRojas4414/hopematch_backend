@@ -41,6 +41,7 @@ public class PadrinoService {
             padrino.setContrasenia(padrinoDetails.getContrasenia());
             padrino.setCelular(padrinoDetails.getCelular());
             padrino.setFoto(padrinoDetails.getFoto());
+            padrino.setEstado(padrinoDetails.getEstado());
             return padrinoRepository.save(padrino);
         }).orElseThrow(() -> new RuntimeException("Padrino no encontrado con id: " + id));
     }

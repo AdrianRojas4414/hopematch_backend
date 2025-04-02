@@ -45,9 +45,14 @@ public class EncargadoController {
     public ResponseEntity<String> login(@RequestBody Encargado loginEncargado) {
         Optional<Encargado> encargado = encargadoService.findByEmail(loginEncargado.getEmail());
         if (encargado.isPresent() && loginEncargado.getContrasenia().equals(encargado.get().getContrasenia())) {
-            return ResponseEntity.ok("{\"id\": \"" + encargado.get().getId() + "\", \"userType\": \"Encargado\"}");
+            if(encargado.get().getEstado().equals("En revision") || encargado.get().getEstado().equals("Activo")){
+                return ResponseEntity.ok("{\"id\": \"" + encargado.get().getId() + "\", \"userType\": \"Encargado\"}");
+            }
+            else {
+                return ResponseEntity.status(401).body("La cuenta se encuentra suspendida, no se puede iniciar sesion");
+            }
         } else {
-            return ResponseEntity.status(401).body("{\"message\": \"Usuario o contraseña incorrectos\"}");
+            return ResponseEntity.status(401).body("Usuario o contraseña incorrectos");
         }
     }
 
