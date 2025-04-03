@@ -72,4 +72,11 @@ public class DonacionService {
         return donacionRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Donación no encontrada con ID: " + id));
     }
+
+    public Donacion agregarComentarioEncargado(Integer donacionId, String comentario) {
+        Donacion donacion = donacionRepository.findById(donacionId)
+                .orElseThrow(() -> new RuntimeException("Donación no encontrada"));
+        donacion.setComentarioEncargado(comentario);
+        return donacionRepository.save(donacion);
+    }
 }

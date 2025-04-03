@@ -37,4 +37,7 @@ public class Donacion {
     @Column(name = "cantidad_donacion", nullable = false)
     private Double cantidadDonacion;
 
+    @Column(length = 500)
+    private String comentarioEncargado;
+
 }
