@@ -79,4 +79,11 @@ public class DonacionService {
         donacion.setComentarioEncargado(comentario);
         return donacionRepository.save(donacion);
     }
+
+    public Donacion agregarFotoEncargado(Integer donacionId, String foto) {
+        Donacion donacion = donacionRepository.findById(donacionId)
+                .orElseThrow(() -> new RuntimeException("Donación no encontrada"));
+        donacion.setFotoDonacion(foto);
+        return donacionRepository.save(donacion);
+    }
 }
