@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/donaciones")
@@ -59,5 +60,13 @@ public class DonacionController {
             @PathVariable Integer id,
             @RequestBody String comentario) {
         return ResponseEntity.ok(donacionService.agregarComentarioEncargado(id, comentario));
+    }
+
+    @PutMapping("/{id}/foto")
+    public ResponseEntity<Donacion> agregarFoto(
+            @PathVariable Integer id,
+            @RequestBody Map<String, String> request) {
+        String fotoUrl = request.get("fotoUrl");
+        return ResponseEntity.ok(donacionService.agregarFotoEncargado(id, fotoUrl));
     }
 }
