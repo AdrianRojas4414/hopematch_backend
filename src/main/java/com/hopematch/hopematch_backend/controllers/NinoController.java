@@ -46,10 +46,9 @@ public class NinoController {
         return ninoService.updateNino(id, ninoDetails);
     }
 
-    @GetMapping("/necesidades")
-    public ResponseEntity<List<String>> getAllNecesidades() {
-        return ResponseEntity.ok(ninoService.getAllUniqueNecesidades());
+    @GetMapping("/necesidades/{idEncargado}")
+    public ResponseEntity<List<String>> getNecesidadesByEncargado(@PathVariable int idEncargado) {
+        return ResponseEntity.ok(ninoService.getNecesidadesByEncargado(idEncargado));
     }
-
 
 }
