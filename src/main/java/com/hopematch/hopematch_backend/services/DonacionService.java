@@ -64,6 +64,10 @@ public class DonacionService {
         return donacionRepository.findByPadrinoId(padrinoId);
     }
 
+    public List<Donacion> getDonacionesByEncargado(int encargadoId) {  // Cambiado de Long a int
+        return donacionRepository.findByEncargadoId(encargadoId);
+    }
+
     public Donacion getDonacionById(int id) {
         return donacionRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Donación no encontrada con ID: " + id));
