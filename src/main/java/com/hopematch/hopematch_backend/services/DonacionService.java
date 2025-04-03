@@ -60,5 +60,8 @@ public class DonacionService {
         return donacionRepository.findAll();
     }
 
+    public List<Donacion> getDonacionesByPadrino(Long padrinoId) {
+        return donacionRepository.findByPadrinoId(padrinoId);
+    }
 
 }

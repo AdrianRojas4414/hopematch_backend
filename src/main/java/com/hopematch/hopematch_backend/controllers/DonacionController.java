@@ -34,4 +34,9 @@ public class DonacionController {
         return ResponseEntity.ok(donacionService.getAllDonaciones());
     }
 
+    @GetMapping("/by-padrino/{padrinoId}")
+    public ResponseEntity<List<Donacion>> listarDonacionesPorPadrino(@PathVariable Long padrinoId) {
+        return ResponseEntity.ok(donacionService.getDonacionesByPadrino(padrinoId));
+    }
+
 }

@@ -18,4 +18,5 @@ public interface DonacionRepository extends JpaRepository<Donacion, Integer> {
 
     Optional<Donacion> findById(int id);
 
+    List<Donacion> findByPadrinoId(Long padrinoId);
 }
