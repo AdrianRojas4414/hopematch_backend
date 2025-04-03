@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class NinoService {
@@ -41,7 +42,7 @@ public class NinoService {
         }).orElseThrow(() -> new RuntimeException("Niño no encontrado con id: " + id));
     }
 
-    public List<String> getAllUniqueNecesidades() {
-        return ninoRepository.findDistinctNecesidades();
+    public List<String> getNecesidadesByEncargado(int idEncargado) {
+        return ninoRepository.findNecesidadesByEncargado(idEncargado);
     }
 }
