@@ -64,4 +64,8 @@ public class DonacionService {
         return donacionRepository.findByPadrinoId(padrinoId);
     }
 
+    public Donacion getDonacionById(int id) {
+        return donacionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Donación no encontrada con ID: " + id));
+    }
 }
