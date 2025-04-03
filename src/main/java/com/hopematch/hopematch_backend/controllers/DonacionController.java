@@ -34,4 +34,18 @@ public class DonacionController {
         return ResponseEntity.ok(donacionService.getAllDonaciones());
     }
 
+    @GetMapping("/by-padrino/{padrinoId}")
+    public ResponseEntity<List<Donacion>> listarDonacionesPorPadrino(@PathVariable Long padrinoId) {
+        return ResponseEntity.ok(donacionService.getDonacionesByPadrino(padrinoId));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Donacion> obtenerDonacionPorId(@PathVariable int id) {
+        try {
+            Donacion donacion = donacionService.getDonacionById(id);
+            return ResponseEntity.ok(donacion);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
