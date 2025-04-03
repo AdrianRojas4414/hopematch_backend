@@ -48,4 +48,10 @@ public class DonacionController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/by-encargado/{encargadoId}")
+    public ResponseEntity<List<Donacion>> listarDonacionesPorEncargado(@PathVariable int encargadoId) {
+        return ResponseEntity.ok(donacionService.getDonacionesByEncargado(encargadoId));
+    }
+
 }
