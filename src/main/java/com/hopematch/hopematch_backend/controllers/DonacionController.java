@@ -54,4 +54,10 @@ public class DonacionController {
         return ResponseEntity.ok(donacionService.getDonacionesByEncargado(encargadoId));
     }
 
+    @PostMapping("/{id}/comentario")
+    public ResponseEntity<Donacion> agregarComentario(
+            @PathVariable Integer id,
+            @RequestBody String comentario) {
+        return ResponseEntity.ok(donacionService.agregarComentarioEncargado(id, comentario));
+    }
 }
