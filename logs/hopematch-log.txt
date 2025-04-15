@@ -287,3 +287,307 @@ java.util.NoSuchElementException: No value present
 2025-04-10 12:04:18 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-04-10 12:04:18 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2025-04-10 12:04:18 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-04-11 22:01:57 [main] INFO  c.h.h.HopematchBackendApplicationTests - Starting HopematchBackendApplicationTests using Java 21 with PID 3856 (started by rey27 in C:\Users\rey27\Documents\tallersis\hopematch_backend)
+2025-04-11 22:01:57 [main] INFO  c.h.h.HopematchBackendApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-04-11 22:01:58 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-11 22:01:58 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 70 ms. Found 4 JPA repository interfaces.
+2025-04-11 22:01:58 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-04-11 22:01:59 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@424f02b8
+2025-04-11 22:01:59 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-04-11 22:01:59 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-11 22:01:59 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
+2025-04-11 22:01:59 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-04-11 22:01:59 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-11 22:02:00 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-11 22:02:00 [main] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-04-11 22:02:00 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-11 22:02:00 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(12, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@2b1d1a5) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@41e7a544)
+2025-04-11 22:02:00 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-9, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@3b66ac74) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@573870cb)
+2025-04-11 22:02:00 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-3, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@5b88af70) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@2739ecc0)
+2025-04-11 22:02:00 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4003, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@2932e15f) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@3d98729a)
+2025-04-11 22:02:00 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4001, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@2375a976) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@4bc21e34)
+2025-04-11 22:02:00 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4002, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@7544260a) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@bb6869a)
+2025-04-11 22:02:00 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2004, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@506b083) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@5eee3da9)
+2025-04-11 22:02:00 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2005, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@ace2408) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@3573e19d)
+2025-04-11 22:02:00 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2011, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@5c1dd18) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@2a6dbb7c)
+2025-04-11 22:02:01 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-11 22:02:01 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-11 22:02:01 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-11 22:02:02 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-11 22:02:02 [main] INFO  c.h.h.HopematchBackendApplicationTests - Started HopematchBackendApplicationTests in 5.882 seconds (process running for 7.03)
+2025-04-11 22:02:03 [main] INFO  c.h.h.utils.LogHelper - Nueva donación registrada por el padrino.
+2025-04-11 22:02:03 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-11 22:02:03 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-04-11 22:02:03 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-04-11 22:04:40 [main] INFO  c.h.h.HopematchBackendApplicationTests - Starting HopematchBackendApplicationTests using Java 21 with PID 20600 (started by rey27 in C:\Users\rey27\Documents\tallersis\hopematch_backend)
+2025-04-11 22:04:40 [main] INFO  c.h.h.HopematchBackendApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-04-11 22:04:40 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-11 22:04:40 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 61 ms. Found 4 JPA repository interfaces.
+2025-04-11 22:04:41 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-04-11 22:04:41 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@54895681
+2025-04-11 22:04:41 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-04-11 22:04:41 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-11 22:04:41 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
+2025-04-11 22:04:41 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-04-11 22:04:42 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-11 22:04:42 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-11 22:04:42 [main] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-04-11 22:04:42 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-11 22:04:42 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(12, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@708f7386) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@377e90b0)
+2025-04-11 22:04:42 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-9, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@27b490de) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@36cf16a6)
+2025-04-11 22:04:42 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-3, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@3dd750ba) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@7eefaca0)
+2025-04-11 22:04:42 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4003, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@7d5ef1c3) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@33eab2e8)
+2025-04-11 22:04:42 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4001, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@34bf66af) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@37364634)
+2025-04-11 22:04:42 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4002, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@3dec79f8) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@5bf7f15f)
+2025-04-11 22:04:42 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2004, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@14b26e90) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@11309dd4)
+2025-04-11 22:04:42 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2005, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@4f4d05b3) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@2bd4780c)
+2025-04-11 22:04:42 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2011, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@2c154508) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@395eb363)
+2025-04-11 22:04:43 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-11 22:04:43 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-11 22:04:43 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-11 22:04:44 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-11 22:04:44 [main] INFO  c.h.h.HopematchBackendApplicationTests - Started HopematchBackendApplicationTests in 5.252 seconds (process running for 6.231)
+2025-04-11 22:04:45 [main] INFO  c.h.h.utils.LogHelper - Nueva donación registrada por el padrino.
+2025-04-11 22:04:46 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-11 22:04:46 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-04-11 22:04:46 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-04-11 22:10:00 [main] INFO  c.h.h.HopematchBackendApplicationTests - Starting HopematchBackendApplicationTests using Java 21 with PID 14788 (started by rey27 in C:\Users\rey27\Documents\tallersis\hopematch_backend)
+2025-04-11 22:10:00 [main] INFO  c.h.h.HopematchBackendApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-04-11 22:10:01 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-11 22:10:01 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 57 ms. Found 4 JPA repository interfaces.
+2025-04-11 22:10:01 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-04-11 22:10:02 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@250967f1
+2025-04-11 22:10:02 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-04-11 22:10:02 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-11 22:10:02 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
+2025-04-11 22:10:02 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-04-11 22:10:02 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-11 22:10:02 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-11 22:10:02 [main] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-04-11 22:10:02 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-11 22:10:02 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(12, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@fceab5d) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@79445efb)
+2025-04-11 22:10:02 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-9, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@1592e540) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@3e2772a9)
+2025-04-11 22:10:02 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-3, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@4449b273) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@1fa18f87)
+2025-04-11 22:10:02 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4003, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@1d9bd1d6) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@18ac4af6)
+2025-04-11 22:10:02 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4001, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@117fb9ba) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@2b1d1a5)
+2025-04-11 22:10:02 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4002, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@41e7a544) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@3b66ac74)
+2025-04-11 22:10:02 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2004, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@573870cb) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@5b88af70)
+2025-04-11 22:10:02 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2005, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@2739ecc0) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@2932e15f)
+2025-04-11 22:10:02 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2011, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@3d98729a) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@2375a976)
+2025-04-11 22:10:03 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-11 22:10:03 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-11 22:10:04 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-11 22:10:04 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-11 22:10:05 [main] INFO  c.h.h.HopematchBackendApplicationTests - Started HopematchBackendApplicationTests in 5.204 seconds (process running for 6.137)
+2025-04-11 22:10:06 [main] INFO  c.h.h.utils.LogHelper - Nueva donación registrada por el padrino.
+2025-04-11 22:10:06 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-11 22:10:06 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-04-11 22:10:06 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-04-11 22:10:49 [main] INFO  c.h.h.HopematchBackendApplicationTests - Starting HopematchBackendApplicationTests using Java 21 with PID 18360 (started by rey27 in C:\Users\rey27\Documents\tallersis\hopematch_backend)
+2025-04-11 22:10:49 [main] INFO  c.h.h.HopematchBackendApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-04-11 22:10:50 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-11 22:10:50 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 60 ms. Found 4 JPA repository interfaces.
+2025-04-11 22:10:50 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-04-11 22:10:50 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5c82031b
+2025-04-11 22:10:50 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-04-11 22:10:50 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-11 22:10:51 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
+2025-04-11 22:10:51 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-04-11 22:10:51 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-11 22:10:51 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-11 22:10:51 [main] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-04-11 22:10:51 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-11 22:10:51 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(12, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@1fa18f87) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@1d9bd1d6)
+2025-04-11 22:10:51 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-9, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@18ac4af6) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@117fb9ba)
+2025-04-11 22:10:51 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-3, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@2b1d1a5) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@41e7a544)
+2025-04-11 22:10:51 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4003, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@3b66ac74) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@573870cb)
+2025-04-11 22:10:51 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4001, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@5b88af70) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@2739ecc0)
+2025-04-11 22:10:51 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4002, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@2932e15f) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@3d98729a)
+2025-04-11 22:10:51 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2004, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@2375a976) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@4bc21e34)
+2025-04-11 22:10:51 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2005, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@7544260a) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@bb6869a)
+2025-04-11 22:10:51 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2011, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@506b083) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@5eee3da9)
+2025-04-11 22:10:52 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-11 22:10:52 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-11 22:10:52 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-11 22:10:53 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-11 22:10:53 [main] INFO  c.h.h.HopematchBackendApplicationTests - Started HopematchBackendApplicationTests in 4.95 seconds (process running for 5.919)
+2025-04-11 22:10:54 [main] INFO  c.h.h.utils.LogHelper - Nueva donación registrada por el padrino.
+2025-04-11 22:10:55 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-11 22:10:55 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-04-11 22:10:55 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-04-11 22:12:04 [main] INFO  c.h.h.HopematchBackendApplicationTests - Starting HopematchBackendApplicationTests using Java 21 with PID 4344 (started by rey27 in C:\Users\rey27\Documents\tallersis\hopematch_backend)
+2025-04-11 22:12:04 [main] INFO  c.h.h.HopematchBackendApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-04-11 22:12:04 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-11 22:12:04 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 63 ms. Found 4 JPA repository interfaces.
+2025-04-11 22:12:05 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-04-11 22:12:05 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@633ddc0c
+2025-04-11 22:12:05 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-04-11 22:12:05 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-11 22:12:05 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
+2025-04-11 22:12:05 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-04-11 22:12:06 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-11 22:12:06 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-11 22:12:06 [main] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-04-11 22:12:06 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-11 22:12:06 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(12, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@5eee3da9) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@ace2408)
+2025-04-11 22:12:06 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-9, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@3573e19d) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@5c1dd18)
+2025-04-11 22:12:06 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-3, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@2a6dbb7c) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@5178345d)
+2025-04-11 22:12:06 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4003, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@7b2d58e6) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@708f7386)
+2025-04-11 22:12:06 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4001, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@377e90b0) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@27b490de)
+2025-04-11 22:12:06 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4002, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@36cf16a6) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@3dd750ba)
+2025-04-11 22:12:06 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2004, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@7eefaca0) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@7d5ef1c3)
+2025-04-11 22:12:06 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2005, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@33eab2e8) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@34bf66af)
+2025-04-11 22:12:06 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2011, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@37364634) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@3dec79f8)
+2025-04-11 22:12:07 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-11 22:12:07 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-11 22:12:07 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-11 22:12:08 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-11 22:12:08 [main] INFO  c.h.h.HopematchBackendApplicationTests - Started HopematchBackendApplicationTests in 5.109 seconds (process running for 6.042)
+2025-04-11 22:12:09 [main] INFO  c.h.h.utils.LogHelper - Nueva donación registrada por el padrino.
+2025-04-11 22:12:10 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-11 22:12:10 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-04-11 22:12:10 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-04-11 22:16:04 [main] INFO  c.h.h.HopematchBackendApplicationTests - Starting HopematchBackendApplicationTests using Java 21 with PID 31176 (started by rey27 in C:\Users\rey27\Documents\tallersis\hopematch_backend)
+2025-04-11 22:16:04 [main] INFO  c.h.h.HopematchBackendApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-04-11 22:16:05 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-11 22:16:05 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 63 ms. Found 4 JPA repository interfaces.
+2025-04-11 22:16:05 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-04-11 22:16:06 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@661e1399
+2025-04-11 22:16:06 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-04-11 22:16:06 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-11 22:16:06 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
+2025-04-11 22:16:06 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-04-11 22:16:06 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-11 22:16:06 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-11 22:16:06 [main] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-04-11 22:16:06 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-11 22:16:06 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(12, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@2b1d1a5) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@41e7a544)
+2025-04-11 22:16:06 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-9, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@3b66ac74) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@573870cb)
+2025-04-11 22:16:06 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-3, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@5b88af70) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@2739ecc0)
+2025-04-11 22:16:06 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4003, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@2932e15f) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@3d98729a)
+2025-04-11 22:16:06 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4001, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@2375a976) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@4bc21e34)
+2025-04-11 22:16:06 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4002, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@7544260a) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@bb6869a)
+2025-04-11 22:16:06 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2004, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@506b083) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@5eee3da9)
+2025-04-11 22:16:06 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2005, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@ace2408) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@3573e19d)
+2025-04-11 22:16:06 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2011, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@5c1dd18) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@2a6dbb7c)
+2025-04-11 22:16:07 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-11 22:16:08 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-11 22:16:08 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-11 22:16:09 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-11 22:16:10 [main] INFO  c.h.h.HopematchBackendApplicationTests - Started HopematchBackendApplicationTests in 5.936 seconds (process running for 6.906)
+2025-04-11 22:16:11 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-11 22:16:11 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-04-11 22:16:11 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-04-11 22:36:09 [main] INFO  c.h.h.HopematchBackendApplication - Starting HopematchBackendApplication using Java 21 with PID 21544 (C:\Users\rey27\Documents\tallersis\hopematch_backend\target\classes started by rey27 in C:\Users\rey27\Documents\tallersis\hopematch_backend)
+2025-04-11 22:36:09 [main] INFO  c.h.h.HopematchBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2025-04-11 22:36:10 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-11 22:36:10 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 79 ms. Found 5 JPA repository interfaces.
+2025-04-11 22:36:10 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-04-11 22:36:10 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-04-11 22:36:10 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-04-11 22:36:10 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-04-11 22:36:11 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-04-11 22:36:11 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1421 ms
+2025-04-11 22:36:11 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-04-11 22:36:11 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@377dfb8d
+2025-04-11 22:36:11 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-04-11 22:36:11 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-11 22:36:11 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
+2025-04-11 22:36:11 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-04-11 22:36:12 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-11 22:36:12 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-11 22:36:12 [main] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-04-11 22:36:12 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-11 22:36:12 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(12, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@347b370c) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@26aee0a6)
+2025-04-11 22:36:12 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-9, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@20184ade) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@35fb3209)
+2025-04-11 22:36:12 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-3, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@5855b0ed) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@92fd091)
+2025-04-11 22:36:12 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4003, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@6b0325d0) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@70439c3)
+2025-04-11 22:36:12 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4001, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@72a33316) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@57fce8b)
+2025-04-11 22:36:12 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4002, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@77204651) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@51cca357)
+2025-04-11 22:36:12 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2004, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@3a9c11fb) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@416c8bb5)
+2025-04-11 22:36:12 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2005, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@340b4f07) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@e994ca)
+2025-04-11 22:36:12 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2011, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@5a205ee5) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@7fb44737)
+2025-04-11 22:36:13 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-11 22:36:13 [main] DEBUG org.hibernate.SQL - create table administradores_db (id_admin integer not null auto_increment, contrasenia varchar(255) not null, email varchar(255) not null, nombre varchar(255) not null, primary key (id_admin)) engine=InnoDB
+2025-04-11 22:36:13 [main] DEBUG org.hibernate.SQL - alter table administradores_db drop index UKnjbavhskp71c3head41vq2khj
+2025-04-11 22:36:13 [main] DEBUG org.hibernate.SQL - alter table administradores_db add constraint UKnjbavhskp71c3head41vq2khj unique (email)
+2025-04-11 22:36:13 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-11 22:36:14 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-11 22:36:14 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-11 22:36:14 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-04-11 22:36:15 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-04-11 22:36:15 [main] INFO  c.h.h.HopematchBackendApplication - Started HopematchBackendApplication in 5.983 seconds (process running for 6.3)
+2025-04-11 22:37:52 [http-nio-8080-exec-5] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-11 22:37:52 [http-nio-8080-exec-5] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-04-11 22:37:52 [http-nio-8080-exec-5] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-04-11 22:37:52 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - insert into administradores_db (contrasenia,email,nombre) values (?,?,?)
+2025-04-11 22:40:38 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - select a1_0.id_admin,a1_0.contrasenia,a1_0.email,a1_0.nombre from administradores_db a1_0 where a1_0.email=?
+2025-04-11 22:41:18 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - select a1_0.id_admin,a1_0.contrasenia,a1_0.email,a1_0.nombre from administradores_db a1_0
+2025-04-11 22:41:37 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - select a1_0.id_admin,a1_0.contrasenia,a1_0.email,a1_0.nombre from administradores_db a1_0 where a1_0.id_admin=?
+2025-04-11 22:42:12 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - insert into administradores_db (contrasenia,email,nombre) values (?,?,?)
+2025-04-11 22:42:22 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - select a1_0.id_admin,a1_0.contrasenia,a1_0.email,a1_0.nombre from administradores_db a1_0
+2025-04-11 22:42:27 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - select a1_0.id_admin,a1_0.contrasenia,a1_0.email,a1_0.nombre from administradores_db a1_0 where a1_0.id_admin=?
+2025-04-11 23:40:25 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - select a1_0.id_admin,a1_0.contrasenia,a1_0.email,a1_0.nombre from administradores_db a1_0 where a1_0.id_admin=?
+2025-04-11 23:40:32 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - select a1_0.id_admin,a1_0.contrasenia,a1_0.email,a1_0.nombre from administradores_db a1_0
+2025-04-11 23:41:06 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - insert into administradores_db (contrasenia,email,nombre) values (?,?,?)
+2025-04-11 23:44:47 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - select p1_0.id_padrino,p1_0.celular,p1_0.contrasenia,p1_0.email,p1_0.estado,p1_0.foto_perfil,p1_0.nombre from padrinos_db p1_0 where p1_0.email=?
+2025-04-11 23:44:51 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - select e1_0.id_encargado,e1_0.celular,e1_0.contrasenia,e1_0.direccion_hogar,e1_0.email,e1_0.estado,e1_0.foto_perfil,e1_0.nombre,e1_0.nombre_hogar from encargados_db e1_0 where e1_0.email=?
+2025-04-12 00:12:26 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - select a1_0.id_admin,a1_0.contrasenia,a1_0.email,a1_0.nombre from administradores_db a1_0 where a1_0.id_admin=?
+2025-04-12 00:14:14 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - select a1_0.id_admin,a1_0.contrasenia,a1_0.email,a1_0.nombre from administradores_db a1_0 where a1_0.id_admin=?
+2025-04-12 00:14:26 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - select p1_0.id_padrino,p1_0.celular,p1_0.contrasenia,p1_0.email,p1_0.estado,p1_0.foto_perfil,p1_0.nombre from padrinos_db p1_0 where p1_0.email=?
+2025-04-12 00:16:31 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - select a1_0.id_admin,a1_0.contrasenia,a1_0.email,a1_0.nombre from administradores_db a1_0 where a1_0.email=?
+2025-04-12 00:16:33 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - select a1_0.id_admin,a1_0.contrasenia,a1_0.email,a1_0.nombre from administradores_db a1_0 where a1_0.email=?
+2025-04-12 00:16:40 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - select a1_0.id_admin,a1_0.contrasenia,a1_0.email,a1_0.nombre from administradores_db a1_0 where a1_0.email=?
+2025-04-12 00:16:40 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - select a1_0.id_admin,a1_0.contrasenia,a1_0.email,a1_0.nombre from administradores_db a1_0 where a1_0.email=?
+2025-04-12 00:16:41 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - select a1_0.id_admin,a1_0.contrasenia,a1_0.email,a1_0.nombre from administradores_db a1_0 where a1_0.email=?
+2025-04-12 00:17:49 [http-nio-8080-exec-5] ERROR c.h.h.utils.LogHelper - ⚠️ [ERROR 500] /admin/login - Method parameter 'id': Failed to convert value of type 'java.lang.String' to required type 'int'; For input string: "login"
+2025-04-12 00:18:51 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - select a1_0.id_admin,a1_0.contrasenia,a1_0.email,a1_0.nombre from administradores_db a1_0 where a1_0.email=?

@@ -19,6 +19,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+import java.util.List;
 
 class DonacionServiceTest {
 
@@ -88,5 +89,53 @@ class DonacionServiceTest {
             donacionService.getDonacionById(1);
         });
         assertEquals("Donación no encontrada con ID: 1", exception.getMessage());
+    }
+}
+
+    void getDonacionesByPadrinoTest() {
+        long padrinoId = 1L;
+        Donacion donacion = new Donacion();
+        when(donacionRepository.findByPadrinoId(padrinoId)).thenReturn(List.of(donacion));
+
+        List<Donacion> resultado = donacionService.getDonacionesByPadrino(padrinoId);
+
+        assertFalse(resultado.isEmpty());
+        verify(donacionRepository).findByPadrinoId(padrinoId);
+        verifyNoInteractions(padrinoRepository); // No se usa existsById
+    }
+
+    @Test
+    void getDonacionesByEncargadoTest() {
+        int encargadoId = 1;
+        Donacion donacion = new Donacion();
+        when(donacionRepository.findByEncargadoId(encargadoId)).thenReturn(List.of(donacion));
+
+        List<Donacion> resultado = donacionService.getDonacionesByEncargado(encargadoId);
+
+        assertFalse(resultado.isEmpty());
+        verify(donacionRepository).findByEncargadoId(encargadoId);
+        verifyNoInteractions(encargadoRepository); // No se usa existsById
+    }
+
+    @Test
+    void getDonacionesByPadrinoTest_SinResultados() {
+        long padrinoId = 99L;
+        when(donacionRepository.findByPadrinoId(padrinoId)).thenReturn(List.of());
+
+        List<Donacion> resultado = donacionService.getDonacionesByPadrino(padrinoId);
+
+        assertTrue(resultado.isEmpty());
+        verify(donacionRepository).findByPadrinoId(padrinoId);
+    }
+
+    @Test
+    void getDonacionesByEncargadoTest_SinResultados() {
+        int encargadoId = 99;
+        when(donacionRepository.findByEncargadoId(encargadoId)).thenReturn(List.of());
+
+        List<Donacion> resultado = donacionService.getDonacionesByEncargado(encargadoId);
+
+        assertTrue(resultado.isEmpty());
+        verify(donacionRepository).findByEncargadoId(encargadoId);
     }
 }
