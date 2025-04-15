@@ -7,6 +7,7 @@ import com.hopematch.hopematch_backend.repositories.DonacionRepository;
 import com.hopematch.hopematch_backend.repositories.EncargadoRepository;
 import com.hopematch.hopematch_backend.repositories.NinoRepository;
 import com.hopematch.hopematch_backend.repositories.PadrinoRepository;
+import com.hopematch.hopematch_backend.utils.LogHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,7 +53,7 @@ public class DonacionService {
                     .orElseThrow(() -> new RuntimeException("Encargado no encontrado con ID: " + donacion.getEncargado().getId()));
             donacion.setEncargado(encargado);
         }
-
+        LogHelper.info("Nueva donación registrada por el padrino.");
         return donacionRepository.save(donacion);
     }
 
