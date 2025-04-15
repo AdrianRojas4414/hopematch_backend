@@ -17,9 +17,12 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import java.util.List;
+
+class DonacionServiceTest {
 
 class DonacionServiceTest {
 
@@ -38,6 +41,25 @@ class DonacionServiceTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    void getAllDonacionesTest() {
+        when(donacionRepository.findAll()).thenReturn(List.of(new Donacion(), new Donacion()));
+
+        List<Donacion> donaciones = donacionService.getAllDonaciones();
+        assertNotNull(donaciones);
+        assertEquals(2, donaciones.size());
+    }
+
+    @Test
+    void getAllDonacionesEmptyListTest() {
+        when(donacionRepository.findAll()).thenReturn(List.of());
+
+        List<Donacion> donaciones = donacionService.getAllDonaciones();
+
+        assertNotNull(donaciones);
+        assertTrue(donaciones.isEmpty());
     }
 
     @Test
@@ -90,8 +112,8 @@ class DonacionServiceTest {
         });
         assertEquals("Donación no encontrada con ID: 1", exception.getMessage());
     }
-}
-
+  
+    @Test
     void getDonacionesByPadrinoTest() {
         long padrinoId = 1L;
         Donacion donacion = new Donacion();
