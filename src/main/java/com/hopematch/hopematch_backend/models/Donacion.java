@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -28,6 +30,11 @@ public class Donacion {
     @Column(name = "foto_donacion", length = 255, nullable = true)
     private String fotoDonacion;
 
+    @ElementCollection
+    @CollectionTable(name = "donacion_fotos_progreso", joinColumns = @JoinColumn(name = "donacion_id"))
+    @Column(name = "foto_url", length = 255)
+    private List<String> fotosProgreso = new ArrayList<>();
+
     @Column(name = "fecha_donacion", nullable = false)
     private LocalDate fechaDonacion;
 
@@ -40,4 +47,10 @@ public class Donacion {
     @Column(length = 500)
     private String comentarioEncargado;
 
+    public void agregarFotoProgreso(String fotoUrl) {
+        if (fotosProgreso.size() >= 8) {
+            throw new IllegalStateException("No se pueden agregar más de 8 fotos de progreso");
+        }
+        fotosProgreso.add(fotoUrl);
+    }
 }

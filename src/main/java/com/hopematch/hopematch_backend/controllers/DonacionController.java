@@ -69,4 +69,26 @@ public class DonacionController {
         String fotoUrl = request.get("fotoUrl");
         return ResponseEntity.ok(donacionService.agregarFotoEncargado(id, fotoUrl));
     }
+
+    @PostMapping("/{id}/fotos-progreso")
+    public ResponseEntity<Donacion> agregarFotoProgreso(
+            @PathVariable Integer id,
+            @RequestBody Map<String, String> request) {
+        String fotoUrl = request.get("fotoUrl");
+        return ResponseEntity.ok(donacionService.agregarFotoProgreso(id, fotoUrl));
+    }
+
+    @DeleteMapping("/{id}/fotos-progreso/{index}")
+    public ResponseEntity<Donacion> eliminarFotoProgreso(
+            @PathVariable Integer id,
+            @PathVariable int index) {
+        return ResponseEntity.ok(donacionService.eliminarFotoProgreso(id, index));
+    }
+
+    @PutMapping("/{id}/fotos-progreso")
+    public ResponseEntity<Donacion> actualizarFotosProgreso(
+            @PathVariable Integer id,
+            @RequestBody List<String> fotos) {
+        return ResponseEntity.ok(donacionService.actualizarFotosProgreso(id, fotos));
+    }
 }
