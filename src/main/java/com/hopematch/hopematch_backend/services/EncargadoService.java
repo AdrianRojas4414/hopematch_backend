@@ -22,6 +22,9 @@ public class EncargadoService {
         if (encargado.getFoto() == null || encargado.getFoto() == "") {
             encargado.setFoto("https://i.pinimg.com/736x/2c/f5/58/2cf558ab8c1f12b43f7326945672805e.jpg");
         }
+        if (encargado.getFoto_hogar() == null || encargado.getFoto_hogar().isEmpty()) {
+            encargado.setFoto_hogar("https://static.vecteezy.com/system/resources/previews/004/550/083/non_2x/houses-logo-illustration-free-vector.jpg");
+        }
         return encargadoRepository.save(encargado);
     }
 
@@ -59,6 +62,7 @@ public class EncargadoService {
             encargado.setCelular(encargadoDetails.getCelular());
             encargado.setEmail(encargadoDetails.getEmail());
             encargado.setFoto(encargadoDetails.getFoto());
+            encargado.setFoto_hogar(encargadoDetails.getFoto_hogar());
             encargado.setContrasenia(encargadoDetails.getContrasenia());
             encargado.setNombre_hogar(encargadoDetails.getNombre_hogar());
             encargado.setDireccion_hogar(encargadoDetails.getDireccion_hogar());
