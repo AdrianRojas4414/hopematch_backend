@@ -22,7 +22,7 @@ public class EncargadoService {
         if (encargado.getFoto() == null || encargado.getFoto() == "") {
             encargado.setFoto("https://i.pinimg.com/736x/2c/f5/58/2cf558ab8c1f12b43f7326945672805e.jpg");
         }
-        if (encargado.getFoto_hogar() == null || encargado.getFoto_hogar().isEmpty()) {
+        if (encargado.getFoto_hogar() == null || encargado.getFoto_hogar() == "") {
             encargado.setFoto_hogar("https://static.vecteezy.com/system/resources/previews/004/550/083/non_2x/houses-logo-illustration-free-vector.jpg");
         }
         return encargadoRepository.save(encargado);
