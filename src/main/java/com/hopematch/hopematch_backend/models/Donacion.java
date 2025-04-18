@@ -48,9 +48,14 @@ public class Donacion {
     private String comentarioEncargado;
 
     public void agregarFotoProgreso(String fotoUrl) {
+        if (fotosProgreso == null) {
+            fotosProgreso = new ArrayList<>();
+        }
         if (fotosProgreso.size() >= 8) {
             throw new IllegalStateException("No se pueden agregar más de 8 fotos de progreso");
         }
-        fotosProgreso.add(fotoUrl);
+        if (!fotosProgreso.contains(fotoUrl)) { // Evitar duplicados
+            fotosProgreso.add(fotoUrl);
+        }
     }
 }

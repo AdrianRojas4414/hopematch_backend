@@ -73,9 +73,8 @@ public class DonacionController {
     @PostMapping("/{id}/fotos-progreso")
     public ResponseEntity<Donacion> agregarFotoProgreso(
             @PathVariable Integer id,
-            @RequestBody Map<String, String> request) {
-        String fotoUrl = request.get("fotoUrl");
-        return ResponseEntity.ok(donacionService.agregarFotoProgreso(id, fotoUrl));
+            @RequestBody List<String> fotos) {
+        return ResponseEntity.ok(donacionService.agregarFotosProgreso(id, fotos));
     }
 
     @DeleteMapping("/{id}/fotos-progreso/{index}")

@@ -114,4 +114,21 @@ public class DonacionService {
         donacion.setFotosProgreso(fotos);
         return donacionRepository.save(donacion);
     }
+
+    public Donacion agregarFotosProgreso(Integer donacionId, List<String> fotosUrls) {
+        Donacion donacion = donacionRepository.findById(donacionId)
+                .orElseThrow(() -> new RuntimeException("Donación no encontrada"));
+
+        if (donacion.getFotosProgreso().size() + fotosUrls.size() > 8) {
+            throw new RuntimeException("No se pueden agregar más de 8 fotos de progreso en total");
+        }
+
+        fotosUrls.forEach(url -> {
+            if (!donacion.getFotosProgreso().contains(url)) { // Evitar duplicados
+                donacion.getFotosProgreso().add(url);
+            }
+        });
+
+        return donacionRepository.save(donacion);
+    }
 }
