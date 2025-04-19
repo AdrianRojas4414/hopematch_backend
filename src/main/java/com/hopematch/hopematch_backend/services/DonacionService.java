@@ -87,4 +87,48 @@ public class DonacionService {
         donacion.setFotoDonacion(foto);
         return donacionRepository.save(donacion);
     }
+
+    public Donacion agregarFotoProgreso(Integer donacionId, String fotoUrl) {
+        Donacion donacion = donacionRepository.findById(donacionId)
+                .orElseThrow(() -> new RuntimeException("Donación no encontrada"));
+        donacion.agregarFotoProgreso(fotoUrl);
+        return donacionRepository.save(donacion);
+    }
+
+    public Donacion eliminarFotoProgreso(Integer donacionId, int index) {
+        Donacion donacion = donacionRepository.findById(donacionId)
+                .orElseThrow(() -> new RuntimeException("Donación no encontrada"));
+        if (index >= 0 && index < donacion.getFotosProgreso().size()) {
+            donacion.getFotosProgreso().remove(index);
+            return donacionRepository.save(donacion);
+        }
+        throw new RuntimeException("Índice de foto no válido");
+    }
+
+    public Donacion actualizarFotosProgreso(Integer donacionId, List<String> fotos) {
+        if (fotos.size() > 8) {
+            throw new RuntimeException("No se pueden tener más de 8 fotos de progreso");
+        }
+        Donacion donacion = donacionRepository.findById(donacionId)
+                .orElseThrow(() -> new RuntimeException("Donación no encontrada"));
+        donacion.setFotosProgreso(fotos);
+        return donacionRepository.save(donacion);
+    }
+
+    public Donacion agregarFotosProgreso(Integer donacionId, List<String> fotosUrls) {
+        Donacion donacion = donacionRepository.findById(donacionId)
+                .orElseThrow(() -> new RuntimeException("Donación no encontrada"));
+
+        if (donacion.getFotosProgreso().size() + fotosUrls.size() > 8) {
+            throw new RuntimeException("No se pueden agregar más de 8 fotos de progreso en total");
+        }
+
+        fotosUrls.forEach(url -> {
+            if (!donacion.getFotosProgreso().contains(url)) { // Evitar duplicados
+                donacion.getFotosProgreso().add(url);
+            }
+        });
+
+        return donacionRepository.save(donacion);
+    }
 }

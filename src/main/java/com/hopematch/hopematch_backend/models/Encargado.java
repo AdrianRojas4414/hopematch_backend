@@ -46,6 +46,9 @@ public class Encargado {
     @Column(name = "direccion_hogar", nullable = false, length = 255)
     private String direccion_hogar;
 
+    @Column(name = "foto_hogar", length = 255)
+    private String foto_hogar;
+
     @OneToMany(mappedBy = "encargado", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Nino> ninos = new ArrayList<>();
