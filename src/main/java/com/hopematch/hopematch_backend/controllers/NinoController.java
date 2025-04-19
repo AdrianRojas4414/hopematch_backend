@@ -50,5 +50,15 @@ public class NinoController {
     public ResponseEntity<List<String>> getNecesidadesByEncargado(@PathVariable int idEncargado) {
         return ResponseEntity.ok(ninoService.getNecesidadesByEncargado(idEncargado));
     }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteNino(@PathVariable int id) {
+        try {
+            ninoService.deleteNino(id);
+            return ResponseEntity.ok("Niño eliminado correctamente");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al eliminar el niño: " + e.getMessage());
+        }
+    }
 
 }
