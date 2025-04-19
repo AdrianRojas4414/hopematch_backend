@@ -1,6 +1,10 @@
 # Hopematch Backend
 
-Hopematch is a platform designed to connect sponsors (Padrinos) with children in need (Niños). It enables sponsors to provide support in various forms, such as food, shelter, money, and school supplies, while allowing guardians (Encargados) to oversee the aid distribution and provide updates.
+For compassionate individuals who want to improve the lives of vulnerable children and provide support in the form of food, shelter, education, or essential goods.
+
+The HopeMatch project is a web platform that allows sponsors to choose how they want to help, track their donations, and have direct contact with children in need through photos and video calls.
+
+Unlike other initiatives aimed at helping underprivileged children, HopeMatch humanizes the interaction between sponsors and children's homes, while offering a transparent system where caregivers log and verify the use of donations, ensuring that every contribution reaches those who truly need it.
 
 ## How It Works
 
@@ -9,6 +13,10 @@ Hopematch is a platform designed to connect sponsors (Padrinos) with children in
 3. The platform facilitates donations and allows sponsors to track their contributions.
 4. Encargados upload proof of the received donations (e.g., photos of children using the donated materials).
 5. The backend provides RESTful APIs to manage users, donations, and sponsorships.
+#### Technologies
+1. SpringBoot with Java 17
+2. MySQL
+3. IntelliJ IDEA
 
 ## Installation
 
@@ -16,27 +24,7 @@ Hopematch is a platform designed to connect sponsors (Padrinos) with children in
 Ensure you have the following installed:
 - **Java 17** or later
 - **MySQL** (running locally)
-- **An IDE** (IntelliJ IDEA, Eclipse, or VS Code recommended)
-
-### Database Configuration
-Before running the application, set up a local MySQL database:
-1. Create a database named `hopematch`.
-2. Update the `application.yml` file with your database credentials:
-
-```yaml
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/hopematch
-    username: root
-    password: yourpassword
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
-```
+- **IntelliJ IDEA** (recommended IDE)
 
 ### Running the Backend
 
@@ -46,8 +34,37 @@ spring:
    cd hopematch-backend
    ```
 2. Ensure MySQL is running and the `hopematch` database exists.
-3. Open the project in your IDE.
-4. Run the `HopematchBackendApplication` class.
+
+      #### Database Configuration
+      Before running the application, set up a local MySQL database:
+      1. Create a database named `hopematch` with the command:
+         ```sh
+         CREATE DATABASE hopematch;
+         ```
+      2. Update the `application.yml` file with your database credentials:
+      
+      ```yaml
+      spring:
+        datasource:
+          url: jdbc:mysql://localhost:3306/hopematch
+          username: root
+          password: yourpassword
+        jpa:
+          show-sql: true
+          hibernate:
+            ddl-auto: update
+          properties:
+            hibernate:
+              dialect: org.hibernate.dialect.MySQL8Dialect
+      ```
+
+   
+4. Open the project in IntelliJ IDEA.
+5. Run the `HopematchBackendApplication` class.
+
+
+
+
 
 ## API Endpoints
 
