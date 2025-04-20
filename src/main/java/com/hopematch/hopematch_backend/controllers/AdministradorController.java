@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/administrador")
 @CrossOrigin("http://localhost:4200/")
 public class AdministradorController {
 
