@@ -2,6 +2,7 @@ package com.hopematch.hopematch_backend.controllers;
 
 import com.hopematch.hopematch_backend.models.Administrador;
 import com.hopematch.hopematch_backend.services.AdministradorService;
+import com.hopematch.hopematch_backend.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,12 +12,14 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/administrador")
 @CrossOrigin("http://localhost:4200/")
 public class AdministradorController {
 
     @Autowired
     private AdministradorService administradorService;
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @PostMapping("/add")
     public Administrador postAdministrador(@RequestBody Administrador administrador) {
@@ -27,7 +30,8 @@ public class AdministradorController {
     public ResponseEntity<String> login(@RequestBody Administrador loginAdmin) {
         Optional<Administrador> admin = administradorService.findByEmail(loginAdmin.getEmail());
         if (admin.isPresent() && loginAdmin.getContrasenia().equals(admin.get().getContrasenia())) {
-            return ResponseEntity.ok("{\"id\": \"" + admin.get().getId() + "\", \"userType\": \"Admin\"}");
+            String token = jwtUtil.generateToken(admin.get().getEmail(), "administrador", admin.get().getId());
+            return ResponseEntity.ok("{\"token\": \"" + token + "\"}");
         } else {
             return ResponseEntity.status(401).body("Usuario o contraseña incorrectos");
         }
