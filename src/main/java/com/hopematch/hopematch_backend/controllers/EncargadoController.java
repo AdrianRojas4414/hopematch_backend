@@ -4,6 +4,7 @@ package com.hopematch.hopematch_backend.controllers;
 import com.hopematch.hopematch_backend.models.Encargado;
 import com.hopematch.hopematch_backend.models.Nino;
 import com.hopematch.hopematch_backend.services.EncargadoService;
+import com.hopematch.hopematch_backend.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,8 @@ public class EncargadoController {
 
     @Autowired
     private EncargadoService encargadoService;
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @PostMapping("/add")
     public Encargado createEncargado(@RequestBody Encargado encargado){
@@ -46,7 +49,8 @@ public class EncargadoController {
         Optional<Encargado> encargado = encargadoService.findByEmail(loginEncargado.getEmail());
         if (encargado.isPresent() && loginEncargado.getContrasenia().equals(encargado.get().getContrasenia())) {
             if(encargado.get().getEstado().equals("En revision") || encargado.get().getEstado().equals("Activo")){
-                return ResponseEntity.ok("{\"id\": \"" + encargado.get().getId() + "\", \"userType\": \"Encargado\"}");
+                String token = jwtUtil.generateToken(encargado.get().getEmail(), "Admin", encargado.get().getId());
+                return ResponseEntity.ok("{\"token\": \"" + token + "\"}");
             }
             else {
                 return ResponseEntity.status(401).body("La cuenta se encuentra suspendida, no se puede iniciar sesion");
