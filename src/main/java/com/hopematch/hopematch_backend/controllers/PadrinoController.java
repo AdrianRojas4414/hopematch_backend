@@ -3,6 +3,7 @@ package com.hopematch.hopematch_backend.controllers;
 import com.hopematch.hopematch_backend.models.Encargado;
 import com.hopematch.hopematch_backend.models.Padrino;
 import com.hopematch.hopematch_backend.services.PadrinoService;
+import com.hopematch.hopematch_backend.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,8 @@ public class PadrinoController {
 
     @Autowired
     private PadrinoService padrinoService;
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @PostMapping("/add")
     public Padrino postPadrino(@RequestBody Padrino padrino){
@@ -30,7 +33,8 @@ public class PadrinoController {
         Optional<Padrino> padrino = padrinoService.findByEmail(loginPadrino.getEmail());
         if (padrino.isPresent() && loginPadrino.getContrasenia().equals(padrino.get().getContrasenia())) {
             if(padrino.get().getEstado().equals("En revision") || padrino.get().getEstado().equals("Activo")){
-                return ResponseEntity.ok("{\"id\": \"" + padrino.get().getId() + "\", \"userType\": \"Padrino\"}");
+                String token = jwtUtil.generateToken(padrino.get().getEmail(), "Padrino", padrino.get().getId());
+                return ResponseEntity.ok("{\"token\": \"" + token + "\"}");
             }
             else {
                 return ResponseEntity.status(401).body("La cuenta se encuentra suspendida, no se puede iniciar sesion");
