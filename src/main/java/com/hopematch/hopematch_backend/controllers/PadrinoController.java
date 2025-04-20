@@ -33,7 +33,7 @@ public class PadrinoController {
         Optional<Padrino> padrino = padrinoService.findByEmail(loginPadrino.getEmail());
         if (padrino.isPresent() && loginPadrino.getContrasenia().equals(padrino.get().getContrasenia())) {
             if(padrino.get().getEstado().equals("En revision") || padrino.get().getEstado().equals("Activo")){
-                String token = jwtUtil.generateToken(padrino.get().getEmail(), "Padrino", padrino.get().getId());
+                String token = jwtUtil.generateToken(padrino.get().getEmail(), "padrino", padrino.get().getId());
                 return ResponseEntity.ok("{\"token\": \"" + token + "\"}");
             }
             else {

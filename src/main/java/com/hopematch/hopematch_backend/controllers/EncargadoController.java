@@ -49,7 +49,7 @@ public class EncargadoController {
         Optional<Encargado> encargado = encargadoService.findByEmail(loginEncargado.getEmail());
         if (encargado.isPresent() && loginEncargado.getContrasenia().equals(encargado.get().getContrasenia())) {
             if(encargado.get().getEstado().equals("En revision") || encargado.get().getEstado().equals("Activo")){
-                String token = jwtUtil.generateToken(encargado.get().getEmail(), "Encargado", encargado.get().getId());
+                String token = jwtUtil.generateToken(encargado.get().getEmail(), "encargado", encargado.get().getId());
                 return ResponseEntity.ok("{\"token\": \"" + token + "\"}");
             }
             else {

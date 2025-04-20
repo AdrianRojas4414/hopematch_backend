@@ -30,7 +30,7 @@ public class AdministradorController {
     public ResponseEntity<String> login(@RequestBody Administrador loginAdmin) {
         Optional<Administrador> admin = administradorService.findByEmail(loginAdmin.getEmail());
         if (admin.isPresent() && loginAdmin.getContrasenia().equals(admin.get().getContrasenia())) {
-            String token = jwtUtil.generateToken(admin.get().getEmail(), "Admin", admin.get().getId());
+            String token = jwtUtil.generateToken(admin.get().getEmail(), "administrador", admin.get().getId());
             return ResponseEntity.ok("{\"token\": \"" + token + "\"}");
         } else {
             return ResponseEntity.status(401).body("Usuario o contraseña incorrectos");
