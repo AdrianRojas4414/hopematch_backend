@@ -5,6 +5,8 @@ import com.hopematch.hopematch_backend.repositories.NinoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import com.hopematch.hopematch_backend.models.Encargado;
+import com.hopematch.hopematch_backend.repositories.EncargadoRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +17,8 @@ public class NinoService {
 
     @Autowired
     private NinoRepository ninoRepository;
+    @Autowired
+    private EncargadoRepository encargadoRepository;
 
     public Nino saveNino(Nino nino) {
         return ninoRepository.save(nino);
@@ -44,5 +48,20 @@ public class NinoService {
 
     public List<String> getNecesidadesByEncargado(int idEncargado) {
         return ninoRepository.findNecesidadesByEncargado(idEncargado);
+    }
+
+    public void deleteNino(int id) {
+        Optional<Nino> ninoOpt = ninoRepository.findById(id);
+        if (ninoOpt.isPresent()) {
+            Nino nino = ninoOpt.get();
+
+            Encargado encargado = nino.getEncargado();
+            encargado.getNinos().remove(nino);
+            encargadoRepository.save(encargado);
+
+            ninoRepository.delete(nino);
+        } else {
+            throw new RuntimeException("Niño no encontrado con id: " + id);
+        }
     }
 }
