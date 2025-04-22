@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class DonacionService {
@@ -88,13 +89,6 @@ public class DonacionService {
         return donacionRepository.save(donacion);
     }
 
-    public Donacion agregarFotoProgreso(Integer donacionId, String fotoUrl) {
-        Donacion donacion = donacionRepository.findById(donacionId)
-                .orElseThrow(() -> new RuntimeException("Donación no encontrada"));
-        donacion.agregarFotoProgreso(fotoUrl);
-        return donacionRepository.save(donacion);
-    }
-
     public Donacion eliminarFotoProgreso(Integer donacionId, int index) {
         Donacion donacion = donacionRepository.findById(donacionId)
                 .orElseThrow(() -> new RuntimeException("Donación no encontrada"));
@@ -119,16 +113,19 @@ public class DonacionService {
         Donacion donacion = donacionRepository.findById(donacionId)
                 .orElseThrow(() -> new RuntimeException("Donación no encontrada"));
 
-        if (donacion.getFotosProgreso().size() + fotosUrls.size() > 8) {
-            throw new RuntimeException("No se pueden agregar más de 8 fotos de progreso en total");
-        }
+        List<String> todasFotos = new ArrayList<>(donacion.getFotosProgreso());
 
         fotosUrls.forEach(url -> {
-            if (!donacion.getFotosProgreso().contains(url)) { // Evitar duplicados
-                donacion.getFotosProgreso().add(url);
+            if (!todasFotos.contains(url) && todasFotos.size() < 8) {
+                todasFotos.add(url);
             }
         });
 
+        if (todasFotos.size() > 8) {
+            throw new RuntimeException("No se pueden tener más de 8 fotos de progreso");
+        }
+
+        donacion.setFotosProgreso(todasFotos);
         return donacionRepository.save(donacion);
     }
 }
