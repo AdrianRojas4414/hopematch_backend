@@ -71,9 +71,10 @@ public class DonacionController {
     }
 
     @PostMapping("/{id}/fotos-progreso")
-    public ResponseEntity<Donacion> agregarFotoProgreso(
+    public ResponseEntity<Donacion> agregarFotosProgreso(
             @PathVariable Integer id,
-            @RequestBody List<String> fotos) {
+            @RequestBody Map<String, List<String>> request) {
+        List<String> fotos = request.get("fotos");
         return ResponseEntity.ok(donacionService.agregarFotosProgreso(id, fotos));
     }
 
@@ -87,7 +88,8 @@ public class DonacionController {
     @PutMapping("/{id}/fotos-progreso")
     public ResponseEntity<Donacion> actualizarFotosProgreso(
             @PathVariable Integer id,
-            @RequestBody List<String> fotos) {
+            @RequestBody Map<String, List<String>> request) {
+        List<String> fotos = request.get("fotos");
         return ResponseEntity.ok(donacionService.actualizarFotosProgreso(id, fotos));
     }
 }
