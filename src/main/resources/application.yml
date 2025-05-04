@@ -4,9 +4,9 @@ spring:
     name: hopematch_backend
 
   datasource:
-    url: jdbc:mysql://localhost:3306/hopematch
+    url: jdbc:mysql://database-hopematch.c43c20s6kc2e.us-east-1.rds.amazonaws.com:3306/hopematch
     username: root
-    password: admin
+    password: mysqlroosevelt14
 
   jpa:
     show-sql: true
