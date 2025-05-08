@@ -8,6 +8,7 @@ com\hopematch\hopematch_backend\services\EncargadoService.class
 com\hopematch\hopematch_backend\models\Encargado.class
 com\hopematch\hopematch_backend\controllers\VisitaController.class
 com\hopematch\hopematch_backend\utils\LogHelper.class
+com\hopematch\hopematch_backend\models\Visita$EstadoVisita.class
 com\hopematch\hopematch_backend\services\DonacionService.class
 com\hopematch\hopematch_backend\controllers\PadrinoController.class
 com\hopematch\hopematch_backend\controllers\NinoController.class

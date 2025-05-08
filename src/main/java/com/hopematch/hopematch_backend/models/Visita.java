@@ -3,6 +3,7 @@ package com.hopematch.hopematch_backend.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -24,9 +25,20 @@ public class Visita {
     @JoinColumn(name = "encargado_id", nullable = false)
     private Encargado encargado;
 
-    @Column(name = "fecha_hora", nullable = false)
-    private LocalDateTime fechaHora;
+    @Column(name = "fecha", nullable = false)
+    private LocalDate fecha;
 
-    @Column(name = "esperando_respuesta", nullable = false)
-    private boolean esperandoRespuesta = true;
+    @Column(name = "hora", nullable = false)
+    private String hora;
+
+    @Column(name = "estado", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private EstadoVisita estado = EstadoVisita.PENDIENTE;
+
+    @Column(name = "fecha_creacion", nullable = false)
+    private LocalDateTime fechaCreacion = LocalDateTime.now();
+
+    public enum EstadoVisita {
+        PENDIENTE, ACEPTADA, RECHAZADA, CANCELADA
+    }
 }

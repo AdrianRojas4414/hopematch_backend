@@ -4,7 +4,7 @@ import com.hopematch.hopematch_backend.models.Visita;
 import com.hopematch.hopematch_backend.repositories.VisitaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional; // Importar Transactional
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,28 +20,46 @@ public class VisitaService {
     }
 
     public List<Visita> getPendingVisitasForEncargado(int encargadoId) {
-        return visitaRepository.findByEncargadoIdAndEsperandoRespuesta(encargadoId, true);
+        return visitaRepository.findByEncargadoIdAndEstado(encargadoId, Visita.EstadoVisita.PENDIENTE);
     }
 
-    public Optional<Visita> getVisitaByIdAndEncargadoId(int visitaId, int encargadoId) {
+    public Optional<Visita> findByIdAndEncargadoId(int visitaId, int encargadoId) {
         return visitaRepository.findByIdAndEncargadoId(visitaId, encargadoId);
     }
 
+    public List<Visita> findByPadrinoId(int padrinoId) {
+        return visitaRepository.findByPadrinoId(padrinoId);
+    }
+
+    public List<Visita> findByEncargadoIdAndEstado(int encargadoId, Visita.EstadoVisita estado) {
+        return visitaRepository.findByEncargadoIdAndEstado(encargadoId, estado);
+    }
+
     @Transactional
-    public Optional<Visita> updateVisitaStatus(int visitaId, int encargadoId, boolean nuevoEstadoEspera) {
-        Optional<Visita> optionalVisita = visitaRepository.findByIdAndEncargadoId(visitaId, encargadoId);
+    public Optional<Visita> acceptVisita(int visitaId, int encargadoId) {
+        Optional<Visita> optionalVisita = this.findByIdAndEncargadoId(visitaId, encargadoId);
 
         if (optionalVisita.isPresent()) {
             Visita visita = optionalVisita.get();
-            if (visita.isEsperandoRespuesta()) {
-                visita.setEsperandoRespuesta(nuevoEstadoEspera);
+            if (visita.getEstado() == Visita.EstadoVisita.PENDIENTE) {
+                visita.setEstado(Visita.EstadoVisita.ACEPTADA);
                 return Optional.of(visitaRepository.save(visita));
             }
         }
         return Optional.empty();
     }
 
-    public List<Visita> getVisitasForPadrino(int padrinoId) {
-        return visitaRepository.findByPadrinoId(padrinoId);
+    @Transactional
+    public Optional<Visita> denyVisita(int visitaId, int encargadoId) {
+        Optional<Visita> optionalVisita = this.findByIdAndEncargadoId(visitaId, encargadoId);
+
+        if (optionalVisita.isPresent()) {
+            Visita visita = optionalVisita.get();
+            if (visita.getEstado() == Visita.EstadoVisita.PENDIENTE) {
+                visita.setEstado(Visita.EstadoVisita.RECHAZADA);
+                return Optional.of(visitaRepository.save(visita));
+            }
+        }
+        return Optional.empty();
     }
 }
