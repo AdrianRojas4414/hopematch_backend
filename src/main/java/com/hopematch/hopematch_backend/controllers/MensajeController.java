@@ -5,7 +5,7 @@ import com.hopematch.hopematch_backend.services.MensajeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +19,15 @@ public class MensajeController {
 
     @PostMapping("/add")
     public Mensaje crearMensaje(@RequestBody Mensaje mensaje) {
+
+        mensaje.setFecha(LocalDateTime.now());
+
+        if (mensaje.getMensajeRespuesta() == null) {
+            mensaje.setMensajeRespuesta(""); // Asignar un valor por defecto a mensajeRespuesta si está vacío o nulo
+        }
+        if (!mensaje.isLeido()) {
+            mensaje.setLeido(false); // Por defecto el mensaje no ha sido leído
+        }
         return mensajeService.saveMensaje(mensaje);
     }
 
@@ -57,5 +66,18 @@ public class MensajeController {
     public ResponseEntity<Void> eliminarMensaje(@PathVariable int id) {
         mensajeService.deleteMensaje(id);
         return ResponseEntity.noContent().build();
+    }
+    @PutMapping("/marcar-leido/{id}")
+    public ResponseEntity<Mensaje> marcarMensajeComoLeido(@PathVariable int id) {
+        Optional<Mensaje> mensajeOpt = mensajeService.getMensajeById(id);
+        if (mensajeOpt.isPresent()) {
+            Mensaje mensaje = mensajeOpt.get();
+            mensaje.setLeido(true);  // Marcar el mensaje como leído
+            mensaje.setFecha(LocalDateTime.now());
+            mensajeService.saveMensaje(mensaje);
+            return ResponseEntity.ok(mensaje);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
