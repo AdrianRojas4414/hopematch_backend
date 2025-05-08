@@ -74,4 +74,11 @@ public class EncargadoService {
             throw new RuntimeException("Encargado con ID " + id + " no encontrado.");
         }
     }
+
+    public Encargado getFirstEncargado() {
+        return encargadoRepository.findAll()
+                .stream()
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("No hay encargados disponibles"));
+    }
 }

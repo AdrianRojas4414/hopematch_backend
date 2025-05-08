@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-
 
 @RestController
 @RequestMapping("/mensajes")
@@ -32,7 +32,6 @@ public class MensajeController {
         }
         return mensajeService.saveMensaje(mensaje);
     }
-
 
     @GetMapping("/list")
     public List<Mensaje> listarMensajes() {
@@ -64,7 +63,6 @@ public class MensajeController {
     public ResponseEntity<Mensaje> actualizarMensaje(@PathVariable int id, @RequestBody Mensaje mensajeDetails) {
         return ResponseEntity.ok(mensajeService.updateMensaje(id, mensajeDetails));
     }
-
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> eliminarMensaje(@PathVariable int id) {

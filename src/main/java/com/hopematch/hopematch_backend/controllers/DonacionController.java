@@ -12,7 +12,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/donaciones")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "https://adrianrojas4414.github.io"})
 public class DonacionController {
 
     @Autowired
