@@ -6,10 +6,13 @@ com\hopematch\hopematch_backend\repositories\AdministradorRepository.class
 com\hopematch\hopematch_backend\repositories\PadrinoRepository.class
 com\hopematch\hopematch_backend\services\EncargadoService.class
 com\hopematch\hopematch_backend\models\Encargado.class
+com\hopematch\hopematch_backend\controllers\VisitaController.class
 com\hopematch\hopematch_backend\utils\LogHelper.class
 com\hopematch\hopematch_backend\services\DonacionService.class
 com\hopematch\hopematch_backend\controllers\PadrinoController.class
 com\hopematch\hopematch_backend\controllers\NinoController.class
+com\hopematch\hopematch_backend\models\Visita.class
+com\hopematch\hopematch_backend\repositories\VisitaRepository.class
 com\hopematch\hopematch_backend\utils\JwtUtil.class
 com\hopematch\hopematch_backend\models\Padrino.class
 com\hopematch\hopematch_backend\models\Administrador.class
@@ -18,6 +21,7 @@ com\hopematch\hopematch_backend\services\PadrinoService.class
 com\hopematch\hopematch_backend\models\Donacion.class
 com\hopematch\hopematch_backend\repositories\EncargadoRepository.class
 com\hopematch\hopematch_backend\repositories\DonacionRepository.class
+com\hopematch\hopematch_backend\services\VisitaService.class
 com\hopematch\hopematch_backend\controllers\AdministradorController.class
 com\hopematch\hopematch_backend\repositories\NinoRepository.class
 com\hopematch\hopematch_backend\HopematchBackendApplication.class
