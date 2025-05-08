@@ -5,6 +5,7 @@ import com.hopematch.hopematch_backend.repositories.MensajeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;  // Asegúrate de agregar esta línea
 import java.util.List;
 import java.util.Optional;
 
@@ -42,12 +43,19 @@ public class MensajeService {
         return mensajeRepository.findById(id).map(mensaje -> {
             mensaje.setIdPadrino(mensajeDetails.getIdPadrino());
             mensaje.setIdEncargado(mensajeDetails.getIdEncargado());
+            mensaje.setRemitente(mensajeDetails.getRemitente());
             mensaje.setDestinatario(mensajeDetails.getDestinatario());
             mensaje.setMensaje(mensajeDetails.getMensaje());
-            mensaje.setFecha(mensajeDetails.getFecha());
+            mensaje.setMensajeRespuesta(mensajeDetails.getMensajeRespuesta());
+            mensaje.setLeido(mensajeDetails.isLeido());
+
+            // Actualizar la fecha con la fecha actual del sistema
+            mensaje.setFecha(LocalDateTime.now());
+
             return mensajeRepository.save(mensaje);
         }).orElseThrow(() -> new RuntimeException("Mensaje no encontrado con id: " + id));
     }
+
 
     public void deleteMensaje(int id) {
         mensajeRepository.deleteById(id);
