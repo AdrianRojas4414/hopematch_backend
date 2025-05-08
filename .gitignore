@@ -1,6 +1,6 @@
 HELP.md
 !.mvn/wrapper/maven-wrapper.jar
-
+logs/hopematch-log.txt
 ### STS ###
 .apt_generated
 .classpath
