@@ -39,7 +39,7 @@ public class Mensaje {
     private boolean leido;
 
     // Constructor sin fecha y leido predeterminado a false
-    public Mensaje(int idPadrino, int idEncargado, String remitente, String destinatario, String mensaje) {
+    public Mensaje(int idPadrino, int idEncargado, String remitente, String destinatario, String mensaje, String mensaje_respuesta) {
         this.idPadrino = idPadrino;
         this.idEncargado = idEncargado;
         this.remitente = remitente;
@@ -49,3 +49,4 @@ public class Mensaje {
         this.leido = false;  // Por defecto el mensaje no ha sido leído
     }
 }
+

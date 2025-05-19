@@ -1,0 +1,5 @@
+com\hopematch\hopematch_backend\HopematchBackendApplicationTests.class
+com\hopematch\hopematch_backend\services\NinoServiceTest.class
+com\hopematch\hopematch_backend\services\DonacionServiceTest.class
+com\hopematch\hopematch_backend\services\EncargadoServiceTest.class
+com\hopematch\hopematch_backend\services\PadrinoServiceTest.class

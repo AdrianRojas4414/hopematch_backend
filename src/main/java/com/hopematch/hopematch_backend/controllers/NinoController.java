@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/nino")
-@CrossOrigin("http://localhost:4200/")
+@CrossOrigin(origins = {"http://localhost:4200", "https://adrianrojas4414.github.io"})
 public class NinoController {
 
     @Autowired
@@ -44,6 +44,12 @@ public class NinoController {
     @PutMapping("/update/{id}")
     public Nino updateNino(@PathVariable int id, @RequestBody Nino ninoDetails) {
         return ninoService.updateNino(id, ninoDetails);
+    }
+
+    @GetMapping("/encargado/{idEncargado}")
+    public ResponseEntity<List<Nino>> getNinosByEncargado(@PathVariable int idEncargado) {
+        List<Nino> ninos = ninoService.getNinosbyEncargado(idEncargado);
+        return new ResponseEntity<>(ninos, HttpStatus.OK);
     }
 
     @GetMapping("/necesidades/{idEncargado}")

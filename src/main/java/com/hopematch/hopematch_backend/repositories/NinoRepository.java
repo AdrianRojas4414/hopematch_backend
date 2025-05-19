@@ -15,4 +15,6 @@ public interface NinoRepository extends JpaRepository<Nino, Integer> {
 
     @Query("SELECT elementos FROM Nino n JOIN n.necesidades elementos WHERE n.encargado.id = :idEncargado GROUP BY elementos ORDER BY COUNT(elementos) DESC")
     List<String> findNecesidadesByEncargado(@Param("idEncargado") int idEncargado);
+
+    List<Nino> findByEncargadoId(int idEncargado);
 }

@@ -36,6 +36,10 @@ public class NinoService {
         return ninoRepository.findAll();
     }
 
+    public List<Nino> getNinosbyEncargado(int idEncargado) {
+        return ninoRepository.findByEncargadoId(idEncargado);
+    }
+
     public Nino updateNino(int id, Nino ninoDetails) {
         return ninoRepository.findById(id).map(nino -> {
             nino.setCi(ninoDetails.getCi());

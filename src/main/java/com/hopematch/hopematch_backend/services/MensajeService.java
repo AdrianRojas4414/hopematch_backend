@@ -43,6 +43,7 @@ public class MensajeService {
         return mensajeRepository.findById(id).map(mensaje -> {
             mensaje.setIdPadrino(mensajeDetails.getIdPadrino());
             mensaje.setIdEncargado(mensajeDetails.getIdEncargado());
+
             mensaje.setRemitente(mensajeDetails.getRemitente());
             mensaje.setDestinatario(mensajeDetails.getDestinatario());
             mensaje.setMensaje(mensajeDetails.getMensaje());
@@ -50,7 +51,6 @@ public class MensajeService {
 
             // Actualizar la fecha con la fecha actual del sistema
             mensaje.setFecha(LocalDateTime.now());
-
             return mensajeRepository.save(mensaje);
         }).orElseThrow(() -> new RuntimeException("Mensaje no encontrado con id: " + id));
     }
@@ -60,3 +60,4 @@ public class MensajeService {
         mensajeRepository.deleteById(id);
     }
 }
+

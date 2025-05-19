@@ -5,11 +5,9 @@ import com.hopematch.hopematch_backend.services.MensajeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-
 
 @RestController
 @RequestMapping("/mensajes")
@@ -29,7 +27,6 @@ public class MensajeController {
         }
         return mensajeService.saveMensaje(mensaje);
     }
-
 
     @GetMapping("/list")
     public List<Mensaje> listarMensajes() {
@@ -62,13 +59,11 @@ public class MensajeController {
         return ResponseEntity.ok(mensajeService.updateMensaje(id, mensajeDetails));
     }
 
-
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> eliminarMensaje(@PathVariable int id) {
         mensajeService.deleteMensaje(id);
         return ResponseEntity.noContent().build();
     }
-
     @PutMapping("/marcar-leido/{id}")
     public ResponseEntity<Mensaje> marcarMensajeComoLeido(@PathVariable int id) {
         Optional<Mensaje> mensajeOpt = mensajeService.getMensajeById(id);

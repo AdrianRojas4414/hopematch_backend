@@ -51,4 +51,14 @@ public class JwtUtil {
             return false;
         }
     }
+
+    public int extractId(String token) {
+        SecretKey key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
+        JwtParser parser = Jwts.parser()
+                .verifyWith(key)
+                .build();
+        return parser.parseSignedClaims(token)
+                .getPayload()
+                .get("id", Integer.class);
+    }
 }
