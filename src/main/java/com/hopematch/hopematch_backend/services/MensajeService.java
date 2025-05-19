@@ -47,7 +47,6 @@ public class MensajeService {
             mensaje.setRemitente(mensajeDetails.getRemitente());
             mensaje.setDestinatario(mensajeDetails.getDestinatario());
             mensaje.setMensaje(mensajeDetails.getMensaje());
-            mensaje.setMensajeRespuesta(mensajeDetails.getMensajeRespuesta());
             mensaje.setLeido(mensajeDetails.isLeido());
 
             // Actualizar la fecha con la fecha actual del sistema

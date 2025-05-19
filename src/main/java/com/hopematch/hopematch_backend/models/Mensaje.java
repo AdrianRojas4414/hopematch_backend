@@ -32,9 +32,6 @@ public class Mensaje {
     @Column(name = "mensaje", columnDefinition = "TEXT", nullable = false)
     private String mensaje;
 
-    @Column(name = "mensaje_respuesta", columnDefinition = "TEXT")
-    private String mensajeRespuesta;
-
     @Column(name = "fecha", nullable = false)
     private LocalDateTime fecha;
 
@@ -48,7 +45,6 @@ public class Mensaje {
         this.remitente = remitente;
         this.destinatario = destinatario;
         this.mensaje = mensaje;
-        this.mensajeRespuesta = mensaje_respuesta;
         this.fecha = LocalDateTime.now();
         this.leido = false;  // Por defecto el mensaje no ha sido leído
     }

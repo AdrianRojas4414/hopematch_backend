@@ -22,9 +22,6 @@ public class MensajeController {
 
         mensaje.setFecha(LocalDateTime.now());
 
-        if (mensaje.getMensajeRespuesta() == null) {
-            mensaje.setMensajeRespuesta(""); // Asignar un valor por defecto a mensajeRespuesta si está vacío o nulo
-        }
         if (!mensaje.isLeido()) {
             mensaje.setLeido(false); // Por defecto el mensaje no ha sido leído
         }
