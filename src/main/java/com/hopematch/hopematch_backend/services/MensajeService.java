@@ -41,8 +41,8 @@ public class MensajeService {
 
     public Mensaje updateMensaje(int id, Mensaje mensajeDetails) {
         return mensajeRepository.findById(id).map(mensaje -> {
-            mensaje.setIdPadrino(mensajeDetails.getIdPadrino());
-            mensaje.setIdEncargado(mensajeDetails.getIdEncargado());
+            mensaje.setIdRemitente(mensajeDetails.getIdRemitente());
+            mensaje.setIdDestinatario(mensajeDetails.getIdDestinatario());
 
             mensaje.setRemitente(mensajeDetails.getRemitente());
             mensaje.setDestinatario(mensajeDetails.getDestinatario());
@@ -54,7 +54,6 @@ public class MensajeService {
             return mensajeRepository.save(mensaje);
         }).orElseThrow(() -> new RuntimeException("Mensaje no encontrado con id: " + id));
     }
-
 
     public void deleteMensaje(int id) {
         mensajeRepository.deleteById(id);

@@ -17,11 +17,11 @@ public class Mensaje {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "id_padrino", nullable = false)
-    private int idPadrino;
+    @Column(name = "id_remitente", nullable = false)
+    private int idRemitente;
 
-    @Column(name = "id_encargado", nullable = false)
-    private int idEncargado;
+    @Column(name = "id_destinatario", nullable = false)
+    private int idDestinatario;
 
     @Column(name = "remitente", length = 50, nullable = false)
     private String remitente;
@@ -39,9 +39,9 @@ public class Mensaje {
     private boolean leido;
 
     // Constructor sin fecha y leido predeterminado a false
-    public Mensaje(int idPadrino, int idEncargado, String remitente, String destinatario, String mensaje, String mensaje_respuesta) {
-        this.idPadrino = idPadrino;
-        this.idEncargado = idEncargado;
+    public Mensaje(int idRemitente, int idDestinatario, String remitente, String destinatario, String mensaje) {
+        this.idRemitente = idRemitente;
+        this.idDestinatario = idDestinatario;
         this.remitente = remitente;
         this.destinatario = destinatario;
         this.mensaje = mensaje;
