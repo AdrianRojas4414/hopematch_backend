@@ -8,10 +8,12 @@ import java.util.List;
 
 @Repository
 public interface MensajeRepository extends JpaRepository<Mensaje, Integer> {
-    // Ejemplo de método de consulta: buscar mensajes por destinatario
+    // Buscar mensajes por nombre del destinatario
     List<Mensaje> findByDestinatario(String destinatario);
 
-    // Si necesitas filtrar por padrino o encargado
-    List<Mensaje> findByIdPadrino(int idPadrino);
-    List<Mensaje> findByIdEncargado(int idEncargado);
+    // Filtrar por id del remitente
+    List<Mensaje> findByIdRemitente(int idRemitente);
+
+    // Filtrar por id del destinatario
+    List<Mensaje> findByIdDestinatario(int idDestinatario);
 }

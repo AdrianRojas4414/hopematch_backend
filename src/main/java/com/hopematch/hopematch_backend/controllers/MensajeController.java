@@ -5,6 +5,7 @@ import com.hopematch.hopematch_backend.services.MensajeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -19,11 +20,9 @@ public class MensajeController {
 
     @PostMapping("/add")
     public Mensaje crearMensaje(@RequestBody Mensaje mensaje) {
-
         mensaje.setFecha(LocalDateTime.now());
-
         if (!mensaje.isLeido()) {
-            mensaje.setLeido(false); // Por defecto el mensaje no ha sido leído
+            mensaje.setLeido(false);
         }
         return mensajeService.saveMensaje(mensaje);
     }
@@ -39,19 +38,19 @@ public class MensajeController {
         return mensaje.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/por-padrino/{idPadrino}")
-    public List<Mensaje> obtenerMensajesPorPadrino(@PathVariable int idPadrino) {
-        return mensajeService.getMensajesByPadrino(idPadrino);
+    @GetMapping("/por-remitente/{idRemitente}")
+    public List<Mensaje> obtenerMensajesPorRemitente(@PathVariable int idRemitente) {
+        return mensajeService.getMensajesByRemitente(idRemitente);
     }
 
-    @GetMapping("/por-encargado/{idEncargado}")
-    public List<Mensaje> obtenerMensajesPorEncargado(@PathVariable int idEncargado) {
-        return mensajeService.getMensajesByEncargado(idEncargado);
+    @GetMapping("/por-destinatario-id/{idDestinatario}")
+    public List<Mensaje> obtenerMensajesPorDestinatarioId(@PathVariable int idDestinatario) {
+        return mensajeService.getMensajesByDestinatario(idDestinatario);
     }
 
     @GetMapping("/por-destinatario/{destinatario}")
     public List<Mensaje> obtenerMensajesPorDestinatario(@PathVariable String destinatario) {
-        return mensajeService.getMensajesByDestinatario(destinatario);
+        return mensajeService.getMensajesByDestinatarioNombre(destinatario);
     }
 
     @PutMapping("/update/{id}")
@@ -64,12 +63,13 @@ public class MensajeController {
         mensajeService.deleteMensaje(id);
         return ResponseEntity.noContent().build();
     }
+
     @PutMapping("/marcar-leido/{id}")
     public ResponseEntity<Mensaje> marcarMensajeComoLeido(@PathVariable int id) {
         Optional<Mensaje> mensajeOpt = mensajeService.getMensajeById(id);
         if (mensajeOpt.isPresent()) {
             Mensaje mensaje = mensajeOpt.get();
-            mensaje.setLeido(true);  // Marcar el mensaje como leído
+            mensaje.setLeido(true);
             mensaje.setFecha(LocalDateTime.now());
             mensajeService.saveMensaje(mensaje);
             return ResponseEntity.ok(mensaje);

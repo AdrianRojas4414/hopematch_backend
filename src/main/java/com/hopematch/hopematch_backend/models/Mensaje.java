@@ -49,4 +49,3 @@ public class Mensaje {
         this.leido = false;  // Por defecto el mensaje no ha sido leído
     }
 }
-

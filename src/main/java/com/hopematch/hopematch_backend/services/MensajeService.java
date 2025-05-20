@@ -5,7 +5,7 @@ import com.hopematch.hopematch_backend.repositories.MensajeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;  // Asegúrate de agregar esta línea
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,15 +27,15 @@ public class MensajeService {
         return mensajeRepository.findById(id);
     }
 
-    public List<Mensaje> getMensajesByPadrino(int idPadrino) {
-        return mensajeRepository.findByIdPadrino(idPadrino);
+    public List<Mensaje> getMensajesByRemitente(int idRemitente) {
+        return mensajeRepository.findByIdRemitente(idRemitente);
     }
 
-    public List<Mensaje> getMensajesByEncargado(int idEncargado) {
-        return mensajeRepository.findByIdEncargado(idEncargado);
+    public List<Mensaje> getMensajesByDestinatario(int idDestinatario) {
+        return mensajeRepository.findByIdDestinatario(idDestinatario);
     }
 
-    public List<Mensaje> getMensajesByDestinatario(String destinatario) {
+    public List<Mensaje> getMensajesByDestinatarioNombre(String destinatario) {
         return mensajeRepository.findByDestinatario(destinatario);
     }
 
@@ -43,13 +43,10 @@ public class MensajeService {
         return mensajeRepository.findById(id).map(mensaje -> {
             mensaje.setIdRemitente(mensajeDetails.getIdRemitente());
             mensaje.setIdDestinatario(mensajeDetails.getIdDestinatario());
-
             mensaje.setRemitente(mensajeDetails.getRemitente());
             mensaje.setDestinatario(mensajeDetails.getDestinatario());
             mensaje.setMensaje(mensajeDetails.getMensaje());
             mensaje.setLeido(mensajeDetails.isLeido());
-
-            // Actualizar la fecha con la fecha actual del sistema
             mensaje.setFecha(LocalDateTime.now());
             return mensajeRepository.save(mensaje);
         }).orElseThrow(() -> new RuntimeException("Mensaje no encontrado con id: " + id));
@@ -59,4 +56,3 @@ public class MensajeService {
         mensajeRepository.deleteById(id);
     }
 }
-
