@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/nino")
-@CrossOrigin(origins = {"http://localhost:4200", "https://adrianrojas4414.github.io", "http://hopematch.publicvm.com/"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://adrianrojas4414.github.io", "http://hopematch.publicvm.com"})
 public class NinoController {
 
     @Autowired
