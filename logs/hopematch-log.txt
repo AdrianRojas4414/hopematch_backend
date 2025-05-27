@@ -7104,3 +7104,4 @@ Caused by: org.springframework.data.mapping.PropertyReferenceException: No prope
 2025-05-27 13:42:08 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - select n1_0.id_encargado,n1_0.id_nino,n1_0.ci,n1_0.fecha_nacimiento,n1_0.nombre from ninos_db n1_0 where n1_0.id_encargado=?
 2025-05-27 13:42:18 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - select e1_0.id_encargado,e1_0.celular,e1_0.contrasenia,e1_0.descripcion,e1_0.direccion_hogar,e1_0.email,e1_0.estado,e1_0.foto_perfil,e1_0.foto_hogar,e1_0.nombre,e1_0.nombre_hogar from encargados_db e1_0 where e1_0.email=?
 2025-05-27 13:42:19 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - select n1_0.id_encargado,n1_0.id_nino,n1_0.ci,n1_0.fecha_nacimiento,n1_0.nombre from ninos_db n1_0 where n1_0.id_encargado=?
+2025-05-27 16:14:15 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h11m31s477ms707µs400ns).
