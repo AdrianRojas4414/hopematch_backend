@@ -46,32 +46,29 @@ public class EncargadoController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Encargado loginEncargado) {
         Optional<Encargado> encargadoOpt = encargadoService.findByEmail(loginEncargado.getEmail());
-        if (!encargadoOpt.isPresent()) {
+        if (encargadoOpt.isEmpty() || !loginEncargado.getContrasenia().equals(encargadoOpt.get().getContrasenia())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Collections.singletonMap("message", "Usuario o contraseña incorrectos"));
-        }
-
-        if (!loginEncargado.getContrasenia().equals(encargadoOpt.get().getContrasenia())) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Collections.singletonMap("message", "Usuario o contraseña incorrectos"));
+                    .body("{\"message\": \"Usuario o contraseña incorrectos\"}");
         }
 
         Encargado encargado = encargadoOpt.get();
         String token = jwtUtil.generateToken(encargado.getEmail(), "encargado", encargado.getId());
+        String estado = encargado.getEstado().trim();
 
-        Map<String, Object> responseBody = new HashMap<>();
-        responseBody.put("token", token);
-        responseBody.put("idEncargado", encargado.getId());
-        responseBody.put("email", encargado.getEmail());
-        responseBody.put("estado", encargado.getEstado());
+        String responseJson = String.format(
+                "{\"token\": \"%s\", \"idEncargado\": %d, \"email\": \"%s\", \"estado\": \"%s\"",
+                token, encargado.getId(), encargado.getEmail(), estado
+        );
 
-        if ("Rechazado".equalsIgnoreCase(encargado.getEstado().trim())) {
-            responseBody.put("message", "Cuenta rechazada - Acceso limitado");
-        } else if ("En revision".equalsIgnoreCase(encargado.getEstado().trim())) {
-            responseBody.put("message", "Cuenta en revisión - Acceso temporal");
+        if ("Rechazado".equalsIgnoreCase(estado)) {
+            responseJson += ", \"message\": \"Cuenta rechazada - Acceso limitado\"";
+        } else if ("En revision".equalsIgnoreCase(estado)) {
+            responseJson += ", \"message\": \"Cuenta en revisión - Acceso temporal\"";
         }
 
-        return ResponseEntity.ok(responseBody);
+        responseJson += "}";
+
+        return ResponseEntity.ok(responseJson);
     }
 
     @PutMapping("/update/{id}")
