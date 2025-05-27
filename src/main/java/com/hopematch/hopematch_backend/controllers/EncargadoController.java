@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -45,18 +47,23 @@ public class EncargadoController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody Encargado loginEncargado) {
-        Optional<Encargado> encargado = encargadoService.findByEmail(loginEncargado.getEmail());
-        if (encargado.isPresent() && loginEncargado.getContrasenia().equals(encargado.get().getContrasenia())) {
-            if(encargado.get().getEstado().equals("En revision") || encargado.get().getEstado().equals("Activo")){
-                String token = jwtUtil.generateToken(encargado.get().getEmail(), "encargado", encargado.get().getId());
-                return ResponseEntity.ok("{\"token\": \"" + token + "\"}");
-            }
-            else {
-                return ResponseEntity.status(401).body("La cuenta se encuentra suspendida, no se puede iniciar sesion");
-            }
+    public ResponseEntity<?> login(@RequestBody Encargado loginEncargado) {
+        Optional<Encargado> encargadoOpt = encargadoService.findByEmail(loginEncargado.getEmail());
+        if (encargadoOpt.isPresent() && loginEncargado.getContrasenia().equals(encargadoOpt.get().getContrasenia())) {
+            Encargado encargado = encargadoOpt.get();
+            String token = jwtUtil.generateToken(encargado.getEmail(), "encargado", encargado.getId());
+
+            Map<String, Object> responseBody = new HashMap<>();
+            responseBody.put("token", token);
+            responseBody.put("idEncargado", encargado.getId());
+            responseBody.put("email", encargado.getEmail());
+            responseBody.put("estado", encargado.getEstado());
+
+            return ResponseEntity.ok(responseBody);
         } else {
-            return ResponseEntity.status(401).body("Usuario o contraseña incorrectos");
+            Map<String, Object> errorBody = new HashMap<>();
+            errorBody.put("message", "Usuario o contraseña incorrectos");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorBody);
         }
     }
 
