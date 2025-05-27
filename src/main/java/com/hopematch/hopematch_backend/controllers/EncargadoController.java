@@ -10,8 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/encargado")
@@ -45,19 +44,31 @@ public class EncargadoController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody Encargado loginEncargado) {
-        Optional<Encargado> encargado = encargadoService.findByEmail(loginEncargado.getEmail());
-        if (encargado.isPresent() && loginEncargado.getContrasenia().equals(encargado.get().getContrasenia())) {
-            if(encargado.get().getEstado().equals("En revision") || encargado.get().getEstado().equals("Activo")){
-                String token = jwtUtil.generateToken(encargado.get().getEmail(), "encargado", encargado.get().getId());
-                return ResponseEntity.ok("{\"token\": \"" + token + "\"}");
-            }
-            else {
-                return ResponseEntity.status(401).body("La cuenta se encuentra suspendida, no se puede iniciar sesion");
-            }
-        } else {
-            return ResponseEntity.status(401).body("Usuario o contraseña incorrectos");
+    public ResponseEntity<?> login(@RequestBody Encargado loginEncargado) {
+        Optional<Encargado> encargadoOpt = encargadoService.findByEmail(loginEncargado.getEmail());
+        if (encargadoOpt.isEmpty() || !loginEncargado.getContrasenia().equals(encargadoOpt.get().getContrasenia())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("{\"message\": \"Usuario o contraseña incorrectos\"}");
         }
+
+        Encargado encargado = encargadoOpt.get();
+        String token = jwtUtil.generateToken(encargado.getEmail(), "encargado", encargado.getId());
+        String estado = encargado.getEstado().trim();
+
+        String responseJson = String.format(
+                "{\"token\": \"%s\", \"idEncargado\": %d, \"email\": \"%s\", \"estado\": \"%s\"",
+                token, encargado.getId(), encargado.getEmail(), estado
+        );
+
+        if ("Rechazado".equalsIgnoreCase(estado)) {
+            responseJson += ", \"message\": \"Cuenta rechazada - Acceso limitado\"";
+        } else if ("En revision".equalsIgnoreCase(estado)) {
+            responseJson += ", \"message\": \"Cuenta en revisión - Acceso temporal\"";
+        }
+
+        responseJson += "}";
+
+        return ResponseEntity.ok(responseJson);
     }
 
     @PutMapping("/update/{id}")
