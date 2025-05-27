@@ -57,28 +57,21 @@ public class EncargadoController {
         }
 
         Encargado encargado = encargadoOpt.get();
-        String estado = encargado.getEstado().trim();
+        String token = jwtUtil.generateToken(encargado.getEmail(), "encargado", encargado.getId());
 
-        if ("Rechazado".equalsIgnoreCase(estado)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body(Collections.singletonMap("message", "Su cuenta ha sido rechazada. Contacte al administrador."));
-        } else if ("En revision".equalsIgnoreCase(estado)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body(Collections.singletonMap("message", "Su cuenta está en revisión. Espere a ser aprobado."));
-        } else if ("Aprobado".equalsIgnoreCase(estado)) {
-            String token = jwtUtil.generateToken(encargado.getEmail(), "encargado", encargado.getId());
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("token", token);
+        responseBody.put("idEncargado", encargado.getId());
+        responseBody.put("email", encargado.getEmail());
+        responseBody.put("estado", encargado.getEstado());
 
-            Map<String, Object> responseBody = new HashMap<>();
-            responseBody.put("token", token);
-            responseBody.put("idEncargado", encargado.getId());
-            responseBody.put("email", encargado.getEmail());
-            responseBody.put("estado", encargado.getEstado());
-
-            return ResponseEntity.ok(responseBody);
-        } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body(Collections.singletonMap("message", "Estado de cuenta no reconocido: " + estado));
+        if ("Rechazado".equalsIgnoreCase(encargado.getEstado().trim())) {
+            responseBody.put("message", "Cuenta rechazada - Acceso limitado");
+        } else if ("En revision".equalsIgnoreCase(encargado.getEstado().trim())) {
+            responseBody.put("message", "Cuenta en revisión - Acceso temporal");
         }
+
+        return ResponseEntity.ok(responseBody);
     }
 
     @PutMapping("/update/{id}")
