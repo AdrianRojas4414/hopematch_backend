@@ -10,10 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/encargado")
@@ -49,8 +46,26 @@ public class EncargadoController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Encargado loginEncargado) {
         Optional<Encargado> encargadoOpt = encargadoService.findByEmail(loginEncargado.getEmail());
-        if (encargadoOpt.isPresent() && loginEncargado.getContrasenia().equals(encargadoOpt.get().getContrasenia())) {
-            Encargado encargado = encargadoOpt.get();
+        if (!encargadoOpt.isPresent()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Collections.singletonMap("message", "Usuario o contraseña incorrectos"));
+        }
+
+        if (!loginEncargado.getContrasenia().equals(encargadoOpt.get().getContrasenia())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Collections.singletonMap("message", "Usuario o contraseña incorrectos"));
+        }
+
+        Encargado encargado = encargadoOpt.get();
+        String estado = encargado.getEstado().trim();
+
+        if ("Rechazado".equalsIgnoreCase(estado)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body(Collections.singletonMap("message", "Su cuenta ha sido rechazada. Contacte al administrador."));
+        } else if ("En revision".equalsIgnoreCase(estado)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body(Collections.singletonMap("message", "Su cuenta está en revisión. Espere a ser aprobado."));
+        } else if ("Aprobado".equalsIgnoreCase(estado)) {
             String token = jwtUtil.generateToken(encargado.getEmail(), "encargado", encargado.getId());
 
             Map<String, Object> responseBody = new HashMap<>();
@@ -61,9 +76,8 @@ public class EncargadoController {
 
             return ResponseEntity.ok(responseBody);
         } else {
-            Map<String, Object> errorBody = new HashMap<>();
-            errorBody.put("message", "Usuario o contraseña incorrectos");
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorBody);
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body(Collections.singletonMap("message", "Estado de cuenta no reconocido: " + estado));
         }
     }
 
