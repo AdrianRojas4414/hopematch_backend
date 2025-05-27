@@ -47,8 +47,8 @@ public class EncargadoController {
     public ResponseEntity<?> login(@RequestBody Encargado loginEncargado) {
         Optional<Encargado> encargadoOpt = encargadoService.findByEmail(loginEncargado.getEmail());
         if (encargadoOpt.isEmpty() || !loginEncargado.getContrasenia().equals(encargadoOpt.get().getContrasenia())) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body("{\"message\": \"Usuario o contraseña incorrectos\"}");
+            return ResponseEntity.status(401)
+                    .body("Usuario o contraseña incorrectos");
         }
 
         Encargado encargado = encargadoOpt.get();
@@ -61,9 +61,11 @@ public class EncargadoController {
         );
 
         if ("Rechazado".equalsIgnoreCase(estado)) {
-            responseJson += ", \"message\": \"Cuenta rechazada - Acceso limitado\"";
+            return ResponseEntity.status(401)
+                    .body(responseJson += ", \"message\": \"Su cuenta está rechazada. Por favor, contáctese con un administrador.");
         } else if ("En revision".equalsIgnoreCase(estado)) {
-            responseJson += ", \"message\": \"Cuenta en revisión - Acceso temporal\"";
+            return ResponseEntity.status(401)
+                    .body(responseJson += ", \"message\": \"Su cuenta está en revisión. Por favor, contáctese con un administrador.");
         }
 
         responseJson += "}";
