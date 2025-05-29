@@ -44,26 +44,33 @@ public class EncargadoController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody Encargado loginEncargado) {
-        Optional<Encargado> encargado = encargadoService.findByEmail(loginEncargado.getEmail());
-
-        if (encargado.isPresent() && loginEncargado.getContrasenia().equals(encargado.get().getContrasenia())) {
-            String estado = encargado.get().getEstado();
-            String token = jwtUtil.generateToken(encargado.get().getEmail(), "encargado", encargado.get().getId());
-
-            if (estado.equals("Aprobado")) {
-                return ResponseEntity.ok("{\"token\": \"" + token + "\"}");
-            }
-            else if (estado.equals("En revision")) {
-                return ResponseEntity.ok("{\"message\": \"Su cuenta está en revisión, por favor contáctese con un administrador\", \"token\": \"" + token + "\"}");
-            }
-            else if (estado.equals("Rechazado")) {
-                return ResponseEntity.ok("{\"message\": \"Su cuenta ha sido rechazada, por favor contáctese con un administrador\", \"token\": \"" + token + "\"}");
-            }
-            return ResponseEntity.ok("{\"token\": \"" + token + "\"}");
-        } else {
-            return ResponseEntity.status(401).body("Usuario o contraseña incorrectos");
+    public ResponseEntity<?> login(@RequestBody Encargado loginEncargado) {
+        Optional<Encargado> encargadoOpt = encargadoService.findByEmail(loginEncargado.getEmail());
+        if (encargadoOpt.isEmpty() || !loginEncargado.getContrasenia().equals(encargadoOpt.get().getContrasenia())) {
+            return ResponseEntity.status(401)
+                    .body("Usuario o contraseña incorrectos");
         }
+
+        Encargado encargado = encargadoOpt.get();
+        String token = jwtUtil.generateToken(encargado.getEmail(), "encargado", encargado.getId());
+        String estado = encargado.getEstado().trim();
+
+        String responseJson = String.format(
+                "{\"token\": \"%s\", \"idEncargado\": %d, \"email\": \"%s\", \"estado\": \"%s\"",
+                token, encargado.getId(), encargado.getEmail(), estado
+        );
+
+        if ("Rechazado".equalsIgnoreCase(estado)) {
+            return ResponseEntity.status(401)
+                    .body(responseJson += ", \"message\": \"Su cuenta está rechazada. Por favor, contáctese con un administrador.");
+        } else if ("En revision".equalsIgnoreCase(estado)) {
+            return ResponseEntity.status(401)
+                    .body(responseJson += ", \"message\": \"Su cuenta está en revisión. Por favor, contáctese con un administrador.");
+        }
+
+        responseJson += "}";
+
+        return ResponseEntity.ok(responseJson);
     }
 
     @PutMapping("/update/{id}")
