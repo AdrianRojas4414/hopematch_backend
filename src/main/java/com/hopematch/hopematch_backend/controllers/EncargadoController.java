@@ -51,14 +51,11 @@ public class EncargadoController {
             String estado = encargado.get().getEstado();
             String token = jwtUtil.generateToken(encargado.get().getEmail(), "encargado", encargado.get().getId());
 
-            if (estado.equals("Aprobado")) {
-                return ResponseEntity.ok("{\"token\": \"" + token + "\"}");
+            if (estado.equals("En revision")) {
+                return ResponseEntity.ok("{\"message\": \"Su cuenta está en revisión, por favor contáctese con Soporte Tecnico\", \"token\": \"" + token + "\"}");
             }
-            else if (estado.equals("En revision")) {
-                return ResponseEntity.ok("{\"message\": \"Su cuenta está en revisión, por favor contáctese con un administrador\", \"token\": \"" + token + "\"}");
-            }
-            else if (estado.equals("Rechazado")) {
-                return ResponseEntity.ok("{\"message\": \"Su cuenta ha sido rechazada, por favor contáctese con un administrador\", \"token\": \"" + token + "\"}");
+            else if (estado.equals("Suspendido")) {
+                return ResponseEntity.ok("{\"message\": \"Su cuenta ha sido suspendida, por favor contáctese con Soporte Tecnico\", \"token\": \"" + token + "\"}");
             }
             return ResponseEntity.ok("{\"token\": \"" + token + "\"}");
         } else {
