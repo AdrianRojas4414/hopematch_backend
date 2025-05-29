@@ -29,32 +29,26 @@ public class PadrinoController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Padrino loginPadrino) {
-        Optional<Padrino> padrinoOpt = padrinoService.findByEmail(loginPadrino.getEmail());
+    public ResponseEntity<String> login(@RequestBody Padrino loginPadrino) {
+        Optional<Padrino> padrino = padrinoService.findByEmail(loginPadrino.getEmail());
 
-        if (padrinoOpt.isEmpty() || !loginPadrino.getContrasenia().equals(padrinoOpt.get().getContrasenia())) {
-            return ResponseEntity.status(401)
-                    .body("Usuario o contraseña incorrectos");
+        if (padrino.isPresent() && loginPadrino.getContrasenia().equals(padrino.get().getContrasenia())) {
+            String estado = padrino.get().getEstado();
+            String token = jwtUtil.generateToken(padrino.get().getEmail(), "padrino", padrino.get().getId());
+
+            if (estado.equals("Activo")) {
+                return ResponseEntity.ok("{\"token\": \"" + token + "\"}");
+            }
+            else if (estado.equals("En revision")) {
+                return ResponseEntity.ok("{\"message\": \"Su cuenta está en revisión, por favor contáctese con un administrador\", \"token\": \"" + token + "\"}");
+            }
+            else if (estado.equals("Rechazado")) {
+                return ResponseEntity.ok("{\"message\": \"Su cuenta ha sido rechazada, por favor contáctese con un administrador\", \"token\": \"" + token + "\"}");
+            }
+            return ResponseEntity.ok("{\"token\": \"" + token + "\"}");
+        } else {
+            return ResponseEntity.status(401).body("Usuario o contraseña incorrectos");
         }
-
-        Padrino padrino = padrinoOpt.get();
-        String token = jwtUtil.generateToken(padrino.getEmail(), "padrino", padrino.getId());
-        String estado = padrino.getEstado().trim();
-
-        String responseJson = String.format(
-                "{\"token\": \"%s\", \"idPadrino\": %d, \"email\": \"%s\", \"estado\": \"%s\"",
-                token, padrino.getId(), padrino.getEmail(), estado
-        );
-
-        if ("Suspendido".equalsIgnoreCase(estado)) {
-            return ResponseEntity.status(401)
-                    .body(responseJson + ", \"message\": \"Su cuenta está suspendida. Por favor, contáctese con un administrador.\"}");
-        } else if ("En revision".equalsIgnoreCase(estado)) {
-            return ResponseEntity.status(401)
-                    .body(responseJson + ", \"message\": \"Su cuenta está en revisión. Por favor, contáctese con un administrador.\"}");
-        }
-
-        return ResponseEntity.ok(responseJson + "}");
     }
 
     @GetMapping("/hello")
