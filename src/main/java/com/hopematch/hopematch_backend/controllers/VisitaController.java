@@ -1,24 +1,14 @@
 package com.hopematch.hopematch_backend.controllers;
 
 import com.hopematch.hopematch_backend.models.Visita;
-import com.hopematch.hopematch_backend.models.Padrino;
-import com.hopematch.hopematch_backend.models.Encargado;
-import com.hopematch.hopematch_backend.services.PadrinoService;
-import com.hopematch.hopematch_backend.services.EncargadoService;
 import com.hopematch.hopematch_backend.services.VisitaService;
-import com.hopematch.hopematch_backend.utils.JwtUtil;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.HttpStatus;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/visitas")
@@ -28,114 +18,49 @@ public class VisitaController {
     @Autowired
     private VisitaService visitaService;
 
-    @Autowired
-    private PadrinoService padrinoService;
-
-    @Autowired
-    private EncargadoService encargadoService;
-
-    @Autowired
-    private JwtUtil jwtUtil;
-
     @PostMapping("/agendar")
-    public ResponseEntity<String> agendarVisita(
-            @RequestHeader("Authorization") String authHeader,
-            @RequestBody Visita visitaRequest) {
+    public ResponseEntity<?> agendarVisita(@RequestBody Map<String, Object> request) {
+        try {
+            Visita visita = new Visita();
+            visita.setFechaVisita(LocalDate.parse(request.get("fechaVisita").toString()));
+            visita.setHoraVisita(LocalTime.parse(request.get("horaVisita").toString()));
+            visita.setPadrinoId(Long.parseLong(request.get("padrinoId").toString()));
+            visita.setEncargadoId(Integer.parseInt(request.get("encargadoId").toString()));
 
-        String token = authHeader.replace("Bearer ", "");
-        int idPadrino = jwtUtil.extractId(token);
-
-        Padrino padrino = padrinoService.getPadrinoById(idPadrino)
-                .orElseThrow(() -> new RuntimeException("Padrino no encontrado"));
-
-        Encargado encargado = encargadoService.getFirstEncargado();
-
-        Visita visita = new Visita();
-        visita.setPadrino(padrino);
-        visita.setEncargado(encargado);
-        visita.setFecha(visitaRequest.getFecha());
-        visita.setHora(visitaRequest.getHora());
-        visita.setEstado(Visita.EstadoVisita.PENDIENTE);
-
-        visitaService.saveVisita(visita);
-
-        return ResponseEntity.ok("Visita agendada correctamente.");
-    }
-
-    @GetMapping("/pending/encargado")
-    public ResponseEntity<List<Visita>> getPendingVisitasForEncargado(
-            @RequestHeader("Authorization") String authHeader) {
-
-        String token = authHeader.replace("Bearer ", "");
-        int idEncargado = jwtUtil.extractId(token);
-
-        List<Visita> visitasPendientes = visitaService.findByEncargadoIdAndEstado(idEncargado, Visita.EstadoVisita.PENDIENTE);
-        return ResponseEntity.ok(visitasPendientes);
-    }
-
-    @PutMapping("/accept/{visitaId}")
-    public ResponseEntity<String> acceptVisita(
-            @RequestHeader("Authorization") String authHeader,
-            @PathVariable int visitaId) {
-
-        String token = authHeader.replace("Bearer ", "");
-        int idEncargado = jwtUtil.extractId(token);
-
-        Optional<Visita> optionalVisita = visitaService.findByIdAndEncargadoId(visitaId, idEncargado);
-
-        if (optionalVisita.isPresent()) {
-            Visita visita = optionalVisita.get();
-            if (visita.getEstado() == Visita.EstadoVisita.PENDIENTE) {
-                visita.setEstado(Visita.EstadoVisita.ACEPTADA);
-                visitaService.saveVisita(visita);
-                return ResponseEntity.ok("Visita aceptada correctamente.");
-            }
+            Visita visitaGuardada = visitaService.saveVisita(visita);
+            return ResponseEntity.ok(visitaGuardada);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500)
+                    .body("Ocurrió un error interno: " + e.getMessage());
         }
-
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body("No se pudo aceptar la visita. Puede que no exista, no te pertenezca o no esté pendiente.");
     }
 
-    @PutMapping("/deny/{visitaId}")
-    public ResponseEntity<String> denyVisita(
-            @RequestHeader("Authorization") String authHeader,
-            @PathVariable int visitaId) {
-
-        String token = authHeader.replace("Bearer ", "");
-        int idEncargado = jwtUtil.extractId(token);
-
-        Optional<Visita> optionalVisita = visitaService.findByIdAndEncargadoId(visitaId, idEncargado);
-
-        if (optionalVisita.isPresent()) {
-            Visita visita = optionalVisita.get();
-            if (visita.getEstado() == Visita.EstadoVisita.PENDIENTE) {
-                visita.setEstado(Visita.EstadoVisita.RECHAZADA);
-                visitaService.saveVisita(visita);
-                return ResponseEntity.ok("Visita rechazada correctamente.");
-            }
-        }
-
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body("No se pudo rechazar la visita. Puede que no exista, no te pertenezca o no esté pendiente.");
+    @GetMapping("/list")
+    public ResponseEntity<List<Visita>> listarVisitas() {
+        return ResponseEntity.ok(visitaService.getAllVisitas());
     }
 
-    @GetMapping("/mine/padrino")
-    public ResponseEntity<List<Visita>> getMyVisitasForPadrino(
-            @RequestHeader("Authorization") String authHeader) {
-
-        String token = authHeader.replace("Bearer ", "");
-        int idPadrino = jwtUtil.extractId(token);
-
-        List<Visita> misVisitas = visitaService.findByPadrinoId(idPadrino);
-        return ResponseEntity.ok(misVisitas);
+    @GetMapping("/by-padrino/{padrinoId}")
+    public ResponseEntity<List<Visita>> listarVisitasPorPadrino(@PathVariable Long padrinoId) {
+        return ResponseEntity.ok(visitaService.getVisitasByPadrino(padrinoId));
     }
 
-    @GetMapping("/horarios-disponibles")
-    public ResponseEntity<List<String>> getHorariosDisponibles() {
-        List<String> horarios = Arrays.asList(
-                "10:00 AM", "11:00 AM", "12:00 PM",
-                "2:00 PM", "3:00 PM", "4:00 PM"
-        );
-        return ResponseEntity.ok(horarios);
+    @GetMapping("/by-encargado/{encargadoId}")
+    public ResponseEntity<List<Visita>> listarVisitasPorEncargado(@PathVariable Integer encargadoId) {
+        return ResponseEntity.ok(visitaService.getVisitasByEncargado(encargadoId));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Visita> obtenerVisitaPorId(@PathVariable Integer id) {
+        return ResponseEntity.ok(visitaService.getVisitaById(id));
+    }
+
+    @PutMapping("/{id}/estado")
+    public ResponseEntity<Visita> actualizarEstadoVisita(
+            @PathVariable Integer id,
+            @RequestBody Map<String, String> request) {
+        return ResponseEntity.ok(visitaService.updateEstadoVisita(id,
+                Visita.EstadoVisita.valueOf(request.get("estado"))));
     }
 }

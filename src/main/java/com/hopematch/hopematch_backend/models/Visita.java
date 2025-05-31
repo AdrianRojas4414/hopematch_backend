@@ -1,44 +1,42 @@
 package com.hopematch.hopematch_backend.models;
 
 import jakarta.persistence.*;
-import lombok.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Data
+@Table(name = "visitas_db")
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "visitas_db")
 public class Visita {
+    public enum EstadoVisita {
+        EN_REVISION,
+        ACEPTADA,
+        RECHAZADA
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_visita")
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "padrino_id", nullable = false)
-    private Padrino padrino;
+    @Column(name = "padrino_id", nullable = false)
+    private Long padrinoId;
 
-    @ManyToOne
-    @JoinColumn(name = "encargado_id", nullable = false)
-    private Encargado encargado;
+    @Column(name = "encargado_id", nullable = false)
+    private Integer encargadoId;
 
-    @Column(name = "fecha", nullable = false)
-    private LocalDate fecha;
+    @Column(name = "fecha_visita", nullable = false)
+    private LocalDate fechaVisita;
 
-    @Column(name = "hora", nullable = false)
-    private String hora;
+    @Column(name = "hora_visita", nullable = false)
+    private LocalTime horaVisita;
 
-    @Column(name = "estado", nullable = false)
+    @Column(name = "estado_visita", nullable = false)
     @Enumerated(EnumType.STRING)
-    private EstadoVisita estado = EstadoVisita.PENDIENTE;
-
-    @Column(name = "fecha_creacion", nullable = false)
-    private LocalDateTime fechaCreacion = LocalDateTime.now();
-
-    public enum EstadoVisita {
-        PENDIENTE, ACEPTADA, RECHAZADA, CANCELADA
-    }
+    private EstadoVisita estadoVisita = EstadoVisita.EN_REVISION;
 }
