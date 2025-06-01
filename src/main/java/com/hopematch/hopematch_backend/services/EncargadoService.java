@@ -4,6 +4,7 @@ import com.hopematch.hopematch_backend.models.Encargado;
 import com.hopematch.hopematch_backend.models.Nino;
 import com.hopematch.hopematch_backend.repositories.EncargadoRepository;
 import com.hopematch.hopematch_backend.repositories.NinoRepository;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,10 @@ public class EncargadoService {
         if (encargado.getFoto_hogar() == null || encargado.getFoto_hogar() == "") {
             encargado.setFoto_hogar("https://static.vecteezy.com/system/resources/previews/004/550/083/non_2x/houses-logo-illustration-free-vector.jpg");
         }
+
+        String hashedPassword = BCrypt.hashpw(encargado.getContrasenia(), BCrypt.gensalt());
+        encargado.setContrasenia(hashedPassword);
+
         return encargadoRepository.save(encargado);
     }
 
@@ -54,6 +59,12 @@ public class EncargadoService {
 
     public Encargado updateEncargado(int id, Encargado encargadoDetails) {
         Optional<Encargado> optionalEncargado = encargadoRepository.findById(id);
+        if (encargadoDetails.getFoto() == null || encargadoDetails.getFoto() == "" ) {
+            encargadoDetails.setFoto("https://i.pinimg.com/736x/2c/f5/58/2cf558ab8c1f12b43f7326945672805e.jpg");
+        }
+        if (encargadoDetails.getFoto_hogar() == null || encargadoDetails.getFoto_hogar() == "" ) {
+            encargadoDetails.setFoto_hogar("https://static.vecteezy.com/system/resources/previews/004/550/083/non_2x/houses-logo-illustration-free-vector.jpg");
+        }
 
         if (optionalEncargado.isPresent()) {
             Encargado encargado = optionalEncargado.get();
@@ -63,7 +74,12 @@ public class EncargadoService {
             encargado.setEmail(encargadoDetails.getEmail());
             encargado.setFoto(encargadoDetails.getFoto());
             encargado.setFoto_hogar(encargadoDetails.getFoto_hogar());
-            encargado.setContrasenia(encargadoDetails.getContrasenia());
+
+            if (encargadoDetails.getContrasenia() != null && !encargadoDetails.getContrasenia().isEmpty()) {
+                String hashedPassword = BCrypt.hashpw(encargadoDetails.getContrasenia(), BCrypt.gensalt());
+                encargado.setContrasenia(hashedPassword);
+            }
+
             encargado.setNombre_hogar(encargadoDetails.getNombre_hogar());
             encargado.setDireccion_hogar(encargadoDetails.getDireccion_hogar());
             encargado.setEstado(encargadoDetails.getEstado());
@@ -80,5 +96,9 @@ public class EncargadoService {
                 .stream()
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("No hay encargados disponibles"));
+    }
+
+    public boolean verifyPassword(String plainPassword, String hashedPassword) {
+        return BCrypt.checkpw(plainPassword, hashedPassword);
     }
 }

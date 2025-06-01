@@ -32,7 +32,7 @@ public class PadrinoController {
     public ResponseEntity<String> login(@RequestBody Padrino loginPadrino) {
         Optional<Padrino> padrino = padrinoService.findByEmail(loginPadrino.getEmail());
 
-        if (padrino.isPresent() && loginPadrino.getContrasenia().equals(padrino.get().getContrasenia())) {
+        if (padrino.isPresent() && padrinoService.verifyPassword(loginPadrino.getContrasenia(), padrino.get().getContrasenia())) {
             String estado = padrino.get().getEstado();
             String token = jwtUtil.generateToken(padrino.get().getEmail(), "padrino", padrino.get().getId());
 
