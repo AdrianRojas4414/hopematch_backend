@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.hopematch.hopematch_backend.services.EncargadoServiceTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.182 s -- in com.hopematch.hopematch_backend.services.EncargadoServiceTest

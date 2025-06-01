@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.hopematch.hopematch_backend.services.MensajeServiceTest
+-------------------------------------------------------------------------------
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.126 s -- in com.hopematch.hopematch_backend.services.MensajeServiceTest
