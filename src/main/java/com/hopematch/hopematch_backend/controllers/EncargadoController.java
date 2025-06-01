@@ -47,7 +47,7 @@ public class EncargadoController {
     public ResponseEntity<String> login(@RequestBody Encargado loginEncargado) {
         Optional<Encargado> encargado = encargadoService.findByEmail(loginEncargado.getEmail());
 
-        if (encargado.isPresent() && loginEncargado.getContrasenia().equals(encargado.get().getContrasenia())) {
+        if (encargado.isPresent() && encargadoService.verifyPassword(loginEncargado.getContrasenia(), encargado.get().getContrasenia())) {
             String estado = encargado.get().getEstado();
             String token = jwtUtil.generateToken(encargado.get().getEmail(), "encargado", encargado.get().getId());
 

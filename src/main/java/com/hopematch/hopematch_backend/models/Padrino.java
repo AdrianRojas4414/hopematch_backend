@@ -30,7 +30,7 @@ public class Padrino {
     private String email;
 
     @Column(name = "estado", nullable = false, length = 50)
-    private String estado;
+    private String estado = "En revision";
 
     @Column(name = "foto_perfil", length = 255)
     private String foto;
