@@ -191,4 +191,44 @@ class AdministradorServiceTest {
 
         assertFalse(result);
     }
+
+    @Test
+    @DisplayName("Guardar administrador con email duplicado - Debería permitirlo si el repositorio lo permite")
+    void saveAdministrador_DuplicateEmail() {
+        when(administradorRepository.save(any(Administrador.class))).thenReturn(admin);
+
+        Administrador result = administradorService.saveAdministrador(admin);
+
+        assertNotNull(result);
+        verify(administradorRepository, times(1)).save(any(Administrador.class));
+    }
+
+    @Test
+    @DisplayName("Actualizar administrador con contraseña nula")
+    void updateAdministrador_NullPassword() {
+        Administrador existingAdmin = new Administrador(1, "Admin", "admin@test.com", "oldHash");
+        Administrador updatedDetails = new Administrador();
+        updatedDetails.setNombre("Updated");
+        updatedDetails.setEmail("updated@test.com");
+        updatedDetails.setContrasenia(null); // Contraseña nula
+
+        when(administradorRepository.findById(1)).thenReturn(Optional.of(existingAdmin));
+        when(administradorRepository.save(any(Administrador.class))).thenReturn(existingAdmin);
+
+        Administrador result = administradorService.updateAdministrador(1, updatedDetails);
+
+        assertEquals("oldHash", result.getContrasenia());
+    }
+
+    @Test
+    @DisplayName("Verificar contraseña con hash nulo - Debería devolver false")
+    void verifyPassword_NullHash_ReturnsFalse() {
+        assertFalse(administradorService.verifyPassword("password", null));
+    }
+
+    @Test
+    @DisplayName("Verificar contraseña con texto plano nulo - Debería devolver false")
+    void verifyPassword_NullPlain_ReturnsFalse() {
+        assertFalse(administradorService.verifyPassword(null, "hash"));
+    }
 }
