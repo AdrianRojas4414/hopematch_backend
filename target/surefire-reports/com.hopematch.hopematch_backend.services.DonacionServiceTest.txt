@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.hopematch.hopematch_backend.services.DonacionServiceTest
 -------------------------------------------------------------------------------
-Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.362 s -- in com.hopematch.hopematch_backend.services.DonacionServiceTest
+Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.199 s -- in com.hopematch.hopematch_backend.services.DonacionServiceTest

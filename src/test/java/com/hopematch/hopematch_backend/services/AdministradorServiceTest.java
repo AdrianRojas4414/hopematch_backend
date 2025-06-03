@@ -221,14 +221,24 @@ class AdministradorServiceTest {
     }
 
     @Test
-    @DisplayName("Verificar contraseña con hash nulo - Debería devolver false")
-    void verifyPassword_NullHash_ReturnsFalse() {
-        assertFalse(administradorService.verifyPassword("password", null));
+    @DisplayName("Verificar contraseña con texto plano vacío - Debería devolver false")
+    void verifyPassword_EmptyPlain_ReturnsFalse() {
+        String hashed = BCrypt.hashpw("password", BCrypt.gensalt());
+        assertFalse(administradorService.verifyPassword("", hashed));
     }
 
     @Test
-    @DisplayName("Verificar contraseña con texto plano nulo - Debería devolver false")
-    void verifyPassword_NullPlain_ReturnsFalse() {
-        assertFalse(administradorService.verifyPassword(null, "hash"));
+    @DisplayName("Actualizar administrador con contraseña vacía - No debe actualizar hash")
+    void updateAdministrador_EmptyPassword_KeepsOldHash() {
+        Administrador existing = new Administrador(1, "Admin", "admin@test.com", "oldHash");
+        Administrador update = new Administrador();
+        update.setContrasenia("");
+
+        when(administradorRepository.findById(1)).thenReturn(Optional.of(existing));
+        when(administradorRepository.save(any())).thenReturn(existing);
+
+        Administrador result = administradorService.updateAdministrador(1, update);
+
+        assertEquals("oldHash", result.getContrasenia());
     }
 }

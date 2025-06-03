@@ -101,4 +101,20 @@ class PadrinoServiceTest {
         assertEquals("Pedro Actualizado", padrino_result.getNombre());
         assertEquals("pedro_updated@example.com", padrino_result.getEmail());
     }
+
+    @Test
+    @DisplayName("Verifica que updatePadrino lanza excepción si id no existe")
+    void updatePadrinoThrows() {
+        Padrino details = new Padrino();
+        details.setNombre("No existe");
+        details.setEmail("noexiste@test.com");
+
+        when(padrinoRepository.findById(999)).thenReturn(Optional.empty());
+
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            padrinoService.updatePadrino(999, details);
+        });
+
+        assertTrue(exception.getMessage().contains("Padrino no encontrado con id"));
+    }
 }

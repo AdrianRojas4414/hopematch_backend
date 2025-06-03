@@ -1,119 +1,142 @@
 package com.hopematch.hopematch_backend.services;
 
+import com.hopematch.hopematch_backend.models.Encargado;
 import com.hopematch.hopematch_backend.models.Nino;
+import com.hopematch.hopematch_backend.repositories.EncargadoRepository;
 import com.hopematch.hopematch_backend.repositories.NinoRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class NinoServiceTest {
+@ExtendWith(MockitoExtension.class)
+public class NinoServiceTest {
 
     @Mock
     private NinoRepository ninoRepository;
 
+    @Mock
+    private EncargadoRepository encargadoRepository;
+
     @InjectMocks
     private NinoService ninoService;
 
+    private Nino nino;
+    private Encargado encargado;
+
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
+        encargado = new Encargado();
+        encargado.setId(1);
+        encargado.setNinos(new ArrayList<>());
+
+        nino = new Nino();
+        nino.setId(1);
+        nino.setCi(123456);
+        nino.setNombre("Juan");
+        nino.setFechaNacimiento(new Date());
+        nino.setNecesidades(Arrays.asList("Comida", "Educación"));
+        nino.setEncargado(encargado);
+
+        encargado.getNinos().add(nino);
     }
 
     @Test
-    @DisplayName("Verifica que el Niño se guarda correctamente.")
-    void saveNinoTest() {
-        Nino nino = new Nino();
-        nino.setNombre("Pedro");
-        nino.setCi(123456);
-
+    @DisplayName("Guardar un nuevo niño correctamente")
+    void testSaveNino() {
         when(ninoRepository.save(any(Nino.class))).thenReturn(nino);
 
         Nino savedNino = ninoService.saveNino(nino);
+
         assertNotNull(savedNino);
-        assertEquals("Pedro", savedNino.getNombre());
+        assertEquals("Juan", savedNino.getNombre());
+        verify(ninoRepository, times(1)).save(nino);
     }
 
     @Test
-    @DisplayName("Verifica que se encuentra un Niño por su Id")
-    void getNinoByIdTest() {
-        Nino nino = new Nino();
-        nino.setNombre("Carlos");
-
+    @DisplayName("Obtener un niño por ID existente")
+    void testGetNinoByIdExists() {
         when(ninoRepository.findById(1)).thenReturn(Optional.of(nino));
 
-        Optional<Nino> result = ninoService.getNinoById(1);
-        assertTrue(result.isPresent());
-        assertEquals("Carlos", result.get().getNombre());
+        Optional<Nino> foundNino = ninoService.getNinoById(1);
+
+        assertTrue(foundNino.isPresent());
+        assertEquals("Juan", foundNino.get().getNombre());
     }
 
     @Test
-    @DisplayName("Verifica que se encuentra un Niño por su CI")
-    void getNinoByCiTest() {
-        Nino nino = new Nino();
-        nino.setCi(987654);
+    @DisplayName("Obtener un niño por CI existente")
+    void testGetNinoByCiExists() {
+        when(ninoRepository.findByCi(123456)).thenReturn(Optional.of(nino));
 
-        when(ninoRepository.findByCi(987654)).thenReturn(Optional.of(nino));
+        Optional<Nino> foundNino = ninoService.getNinoByCi(123456);
 
-        Optional<Nino> result = ninoService.getNinoByCi(987654);
-        assertTrue(result.isPresent());
-        assertEquals(987654, result.get().getCi());
+        assertTrue(foundNino.isPresent());
+        assertEquals(1, foundNino.get().getId());
     }
 
     @Test
-    @DisplayName("Verifica que se obtienen todos los Niños")
-    void getAllNinosTest() {
-        Nino nino1 = new Nino();
-        nino1.setNombre("Pedro");
-        Nino nino2 = new Nino();
-        nino2.setNombre("Maria");
+    @DisplayName("Actualizar un niño existente correctamente")
+    void testUpdateNinoSuccess() {
+        Nino ninoDetails = new Nino();
+        ninoDetails.setCi(654321);
+        ninoDetails.setNombre("Carlos");
+        ninoDetails.setFechaNacimiento(new Date());
+        ninoDetails.setNecesidades(Collections.singletonList("Salud"));
 
-        List<Nino> ninos = Arrays.asList(nino1, nino2);
-        when(ninoRepository.findAll()).thenReturn(ninos);
+        when(ninoRepository.findById(1)).thenReturn(Optional.of(nino));
+        when(ninoRepository.save(any(Nino.class))).thenReturn(ninoDetails);
 
-        List<Nino> ninos_result = ninoService.getAllNinos();
-        assertEquals(2, ninos_result.size());
+        Nino updatedNino = ninoService.updateNino(1, ninoDetails);
+
+        assertEquals("Carlos", updatedNino.getNombre());
+        assertEquals(654321, updatedNino.getCi());
+        verify(ninoRepository, times(1)).save(nino);
     }
 
     @Test
-    @DisplayName("Verifica que se actualiza un Niño correctamente")
-    void updateNinoTest() {
-        Nino existingNino = new Nino();
-        existingNino.setNombre("Pedro");
+    @DisplayName("Actualizar un niño no existente lanza excepción")
+    void testUpdateNinoNotFound() {
+        when(ninoRepository.findById(2)).thenReturn(Optional.empty());
 
-        Nino updatedNino = new Nino();
-        updatedNino.setNombre("Juan");
-        updatedNino.setCi(112233);
+        Nino ninoDetails = new Nino();
 
-        when(ninoRepository.findById(1)).thenReturn(Optional.of(existingNino));
-        when(ninoRepository.save(any(Nino.class))).thenReturn(updatedNino);
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            ninoService.updateNino(2, ninoDetails);
+        });
 
-        Nino nino_result = ninoService.updateNino(1, updatedNino);
-        assertEquals("Juan", nino_result.getNombre());
-        assertEquals(112233, nino_result.getCi());
+        assertEquals("Niño no encontrado con id: 2", exception.getMessage());
     }
 
+    @Test
+    @DisplayName("Eliminar un niño existente correctamente")
+    void testDeleteNinoSuccess() {
+        when(ninoRepository.findById(1)).thenReturn(Optional.of(nino));
+        when(encargadoRepository.save(any(Encargado.class))).thenReturn(encargado);
+
+        assertDoesNotThrow(() -> ninoService.deleteNino(1));
+
+        verify(ninoRepository, times(1)).delete(nino);
+        verify(encargadoRepository, times(1)).save(encargado);
+    }
 
     @Test
-    @DisplayName("Verifica que se lanza una excepción si el Niño no es encontrado al actualizar")
-    void updateNinoNotFoundTest() {
-        Nino updatedNino = new Nino();
-        updatedNino.setNombre("Luis");
-
+    @DisplayName("Eliminar un niño no existente lanza excepción")
+    void testDeleteNinoNotFound() {
         when(ninoRepository.findById(99)).thenReturn(Optional.empty());
 
-        Exception exception = assertThrows(RuntimeException.class, () -> {
-            ninoService.updateNino(99, updatedNino);
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            ninoService.deleteNino(99);
         });
+
         assertEquals("Niño no encontrado con id: 99", exception.getMessage());
     }
 }

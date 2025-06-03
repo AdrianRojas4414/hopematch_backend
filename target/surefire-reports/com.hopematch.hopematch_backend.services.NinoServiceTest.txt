@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.hopematch.hopematch_backend.services.NinoServiceTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.040 s -- in com.hopematch.hopematch_backend.services.NinoServiceTest
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.036 s -- in com.hopematch.hopematch_backend.services.NinoServiceTest

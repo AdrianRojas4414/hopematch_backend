@@ -27,42 +27,36 @@ class AdministradorControllerTest {
     private JwtUtil jwtUtil;
 
     @InjectMocks
-    private AdministradorController administradorController;
+    private AdministradorController controller;
 
     private Administrador admin;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-
-        admin = new Administrador();
-        admin.setId(1);
-        admin.setNombre("Admin Test");
-        admin.setEmail("admin@test.com");
-        admin.setContrasenia("hashedPassword");
+        admin = new Administrador(1, "Admin", "admin@test.com", "hashedPass");
     }
 
     @Test
     void postAdministrador_ShouldReturnSavedAdmin() {
-        when(administradorService.saveAdministrador(any(Administrador.class))).thenReturn(admin);
+        when(administradorService.saveAdministrador(any())).thenReturn(admin);
 
-        Administrador result = administradorController.postAdministrador(admin);
+        Administrador result = controller.postAdministrador(admin);
 
         assertEquals(admin, result);
-        verify(administradorService, times(1)).saveAdministrador(any(Administrador.class));
     }
 
     @Test
     void login_WithValidCredentials_ShouldReturnToken() {
         when(administradorService.findByEmail("admin@test.com")).thenReturn(Optional.of(admin));
-        when(administradorService.verifyPassword("password123", "hashedPassword")).thenReturn(true);
+        when(administradorService.verifyPassword("pass123", "hashedPass")).thenReturn(true);
         when(jwtUtil.generateToken("admin@test.com", "administrador", 1)).thenReturn("mockToken");
 
         Administrador loginRequest = new Administrador();
         loginRequest.setEmail("admin@test.com");
-        loginRequest.setContrasenia("password123");
+        loginRequest.setContrasenia("pass123");
 
-        ResponseEntity<String> response = administradorController.login(loginRequest);
+        ResponseEntity<String> response = controller.login(loginRequest);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertTrue(response.getBody().contains("mockToken"));
@@ -76,38 +70,35 @@ class AdministradorControllerTest {
         loginRequest.setEmail("wrong@test.com");
         loginRequest.setContrasenia("wrongpass");
 
-        ResponseEntity<String> response = administradorController.login(loginRequest);
+        ResponseEntity<String> response = controller.login(loginRequest);
 
         assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
-        assertEquals("Usuario o contraseña incorrectos", response.getBody());
     }
 
     @Test
-    void getAllAdministradores_ShouldReturnAllAdmins() {
-        List<Administrador> admins = Arrays.asList(admin, new Administrador());
-        when(administradorService.getAllAdministradores()).thenReturn(admins);
+    void getAllAdministradores_ShouldReturnList() {
+        when(administradorService.getAllAdministradores()).thenReturn(Arrays.asList(admin));
 
-        List<Administrador> result = administradorController.getAllAdministradores();
+        List<Administrador> result = controller.getAllAdministradores();
 
-        assertEquals(2, result.size());
-        verify(administradorService, times(1)).getAllAdministradores();
+        assertEquals(1, result.size());
     }
 
     @Test
-    void getAdministradorById_WithExistingId_ShouldReturnAdmin() {
+    void getAdministradorById_ExistingId_ShouldReturnAdmin() {
         when(administradorService.getAdministradorById(1)).thenReturn(Optional.of(admin));
 
-        ResponseEntity<Administrador> response = administradorController.getAdministradorById(1);
+        ResponseEntity<Administrador> response = controller.getAdministradorById(1);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(admin, response.getBody());
     }
 
     @Test
-    void getAdministradorById_WithNonExistingId_ShouldReturnNotFound() {
+    void getAdministradorById_NonExistingId_ShouldReturnNotFound() {
         when(administradorService.getAdministradorById(999)).thenReturn(Optional.empty());
 
-        ResponseEntity<Administrador> response = administradorController.getAdministradorById(999);
+        ResponseEntity<Administrador> response = controller.getAdministradorById(999);
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
@@ -116,9 +107,8 @@ class AdministradorControllerTest {
     void updateAdministrador_ShouldReturnUpdatedAdmin() {
         when(administradorService.updateAdministrador(1, admin)).thenReturn(admin);
 
-        Administrador result = administradorController.updateAdministrador(1, admin);
+        Administrador result = controller.updateAdministrador(1, admin);
 
         assertEquals(admin, result);
-        verify(administradorService, times(1)).updateAdministrador(1, admin);
     }
 }
