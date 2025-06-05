@@ -7,12 +7,16 @@ com\hopematch\hopematch_backend\repositories\PadrinoRepository.class
 com\hopematch\hopematch_backend\services\EncargadoService.class
 com\hopematch\hopematch_backend\models\Encargado.class
 com\hopematch\hopematch_backend\controllers\VisitaController.class
+com\hopematch\hopematch_backend\repositories\MensajeRepository.class
 com\hopematch\hopematch_backend\utils\LogHelper.class
 com\hopematch\hopematch_backend\models\Visita$EstadoVisita.class
 com\hopematch\hopematch_backend\services\DonacionService.class
+com\hopematch\hopematch_backend\models\Mensaje.class
 com\hopematch\hopematch_backend\controllers\PadrinoController.class
+com\hopematch\hopematch_backend\services\MensajeService.class
 com\hopematch\hopematch_backend\controllers\NinoController.class
 com\hopematch\hopematch_backend\models\Visita.class
+com\hopematch\hopematch_backend\controllers\MensajeController.class
 com\hopematch\hopematch_backend\repositories\VisitaRepository.class
 com\hopematch\hopematch_backend\utils\JwtUtil.class
 com\hopematch\hopematch_backend\models\Padrino.class

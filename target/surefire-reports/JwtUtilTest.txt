@@ -1,0 +1,18 @@
+-------------------------------------------------------------------------------
+Test set: JwtUtilTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.137 s <<< FAILURE! -- in JwtUtilTest
+JwtUtilTest.testGenerateAndValidateToken -- Time elapsed: 0.010 s <<< ERROR!
+io.jsonwebtoken.io.DecodingException: Illegal base64 character: ''
+	at io.jsonwebtoken.io.Base64.ctoi(Base64.java:221)
+	at io.jsonwebtoken.io.Base64.decodeFast(Base64.java:271)
+	at io.jsonwebtoken.io.Base64Decoder.decode(Base64Decoder.java:39)
+	at io.jsonwebtoken.io.Base64Decoder.decode(Base64Decoder.java:26)
+	at io.jsonwebtoken.io.ExceptionPropagatingDecoder.decode(ExceptionPropagatingDecoder.java:52)
+	at io.jsonwebtoken.impl.DefaultJwtBuilder.signWith(DefaultJwtBuilder.java:276)
+	at com.hopematch.hopematch_backend.utils.JwtUtil.generateToken(JwtUtil.java:28)
+	at JwtUtilTest.testGenerateAndValidateToken(JwtUtilTest.java:37)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+

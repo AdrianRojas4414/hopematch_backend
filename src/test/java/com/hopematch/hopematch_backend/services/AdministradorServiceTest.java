@@ -191,4 +191,54 @@ class AdministradorServiceTest {
 
         assertFalse(result);
     }
+
+    @Test
+    @DisplayName("Guardar administrador con email duplicado - Debería permitirlo si el repositorio lo permite")
+    void saveAdministrador_DuplicateEmail() {
+        when(administradorRepository.save(any(Administrador.class))).thenReturn(admin);
+
+        Administrador result = administradorService.saveAdministrador(admin);
+
+        assertNotNull(result);
+        verify(administradorRepository, times(1)).save(any(Administrador.class));
+    }
+
+    @Test
+    @DisplayName("Actualizar administrador con contraseña nula")
+    void updateAdministrador_NullPassword() {
+        Administrador existingAdmin = new Administrador(1, "Admin", "admin@test.com", "oldHash");
+        Administrador updatedDetails = new Administrador();
+        updatedDetails.setNombre("Updated");
+        updatedDetails.setEmail("updated@test.com");
+        updatedDetails.setContrasenia(null); // Contraseña nula
+
+        when(administradorRepository.findById(1)).thenReturn(Optional.of(existingAdmin));
+        when(administradorRepository.save(any(Administrador.class))).thenReturn(existingAdmin);
+
+        Administrador result = administradorService.updateAdministrador(1, updatedDetails);
+
+        assertEquals("oldHash", result.getContrasenia());
+    }
+
+    @Test
+    @DisplayName("Verificar contraseña con texto plano vacío - Debería devolver false")
+    void verifyPassword_EmptyPlain_ReturnsFalse() {
+        String hashed = BCrypt.hashpw("password", BCrypt.gensalt());
+        assertFalse(administradorService.verifyPassword("", hashed));
+    }
+
+    @Test
+    @DisplayName("Actualizar administrador con contraseña vacía - No debe actualizar hash")
+    void updateAdministrador_EmptyPassword_KeepsOldHash() {
+        Administrador existing = new Administrador(1, "Admin", "admin@test.com", "oldHash");
+        Administrador update = new Administrador();
+        update.setContrasenia("");
+
+        when(administradorRepository.findById(1)).thenReturn(Optional.of(existing));
+        when(administradorRepository.save(any())).thenReturn(existing);
+
+        Administrador result = administradorService.updateAdministrador(1, update);
+
+        assertEquals("oldHash", result.getContrasenia());
+    }
 }
